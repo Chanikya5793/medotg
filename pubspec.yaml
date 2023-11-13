@@ -1,0 +1,41 @@
+name: login
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.6 <3.0.0"
+
+dependencies:
+  cloud_firestore: ^4.3.1
+  cupertino_icons: ^1.0.2
+  email_validator: ^2.1.17
+  file_picker: ^5.2.5
+  firebase_auth: ^4.2.5
+  firebase_core: ^2.4.1
+  firebase_storage: ^11.0.10
+  carousel_slider: ^4.0.0
+  flutter:
+    sdk: flutter
+
+  get: ^4.6.5
+  google_fonts: ^4.0.1
+  hexcolor: ^3.0.1
+  persistent_bottom_nav_bar: ^5.0.2
+  provider: ^6.0.5
+  image_picker: ^0.8.7+5
+  intl: ^0.18.1
+
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/Images/
