@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, camel_case_types, cast_from_null_always_fails
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';

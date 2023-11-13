@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +11,10 @@ class EditArtikelPage extends StatefulWidget {
   const EditArtikelPage({super.key, required this.documentId});
 
   @override
-  _EditArtikelPageState createState() => _EditArtikelPageState();
+  EditArtikelPageState createState() => EditArtikelPageState();
 }
 
-class _EditArtikelPageState extends State<EditArtikelPage> {
+class EditArtikelPageState extends State<EditArtikelPage> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _imageUrlController;

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, file_names, avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

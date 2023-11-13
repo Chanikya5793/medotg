@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,10 +9,10 @@ class AkunPage extends StatefulWidget {
   const AkunPage({super.key});
 
   @override
-  _AkunPageState createState() => _AkunPageState();
+  AkunPageState createState() => AkunPageState();
 }
 
-class _AkunPageState extends State<AkunPage> {
+class AkunPageState extends State<AkunPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   late User user;

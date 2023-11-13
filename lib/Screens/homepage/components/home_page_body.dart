@@ -12,18 +12,18 @@ class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreenBody> createState() => _HomeScreenBodyState();
+  State<HomeScreenBody> createState() => HomeScreenBodyState();
 }
 
 class UserProfileDrawerHeader extends StatefulWidget {
   const UserProfileDrawerHeader({super.key});
 
   @override
-  _UserProfileDrawerHeaderState createState() =>
-      _UserProfileDrawerHeaderState();
+  UserProfileDrawerHeaderState createState() =>
+      UserProfileDrawerHeaderState();
 }
 
-class _UserProfileDrawerHeaderState extends State<UserProfileDrawerHeader> {
+class UserProfileDrawerHeaderState extends State<UserProfileDrawerHeader> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -60,7 +60,7 @@ class _UserProfileDrawerHeaderState extends State<UserProfileDrawerHeader> {
 
           return UserAccountsDrawerHeader(
             accountName: Text(username),
-            accountEmail: Text(userType),
+            accountEmail: Text('$userType , $email'),
             currentAccountPicture: imageUrl != null
                 ? CircleAvatar(backgroundImage: NetworkImage(imageUrl))
                 : const CircleAvatar(backgroundColor: Colors.orange),
@@ -77,7 +77,7 @@ class _UserProfileDrawerHeaderState extends State<UserProfileDrawerHeader> {
   }
 }
 
-class _HomeScreenBodyState extends State<HomeScreenBody> {
+class HomeScreenBodyState extends State<HomeScreenBody> {
   String _searchKeyword = '';
   final TextEditingController _searchController = TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -284,12 +284,17 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
               title: const Text('Logout'),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                // Setelah berhasil sign out, arahkan pengguna ke halaman login
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                // Use a Builder to get a new BuildContext
+                Builder(
+                  builder: (newContext) {
+                    Navigator.pushReplacement(
+                      newContext,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    );
+                    return Container(); // Return an empty container
+                  },
                 );
-              },
+              }
             ),
           ],
         ),

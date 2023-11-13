@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +35,8 @@ class _SignUpThreeState extends State<SignUpThree> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
+    // todo: implement initState
     print(FirebaseAuth.instance.currentUser!.uid);
   }
 
