@@ -35,7 +35,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
   Future<void> _fetchArticle() async {
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('koleksi')
+          .collection('Collection')
           .doc(widget.id)
           .get();
 
@@ -53,7 +53,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
 
   Future<void> _delete() async {
     await FirebaseFirestore.instance
-        .collection('koleksi')
+        .collection('Collection')
         .doc(widget.id)
         .delete();
   }
@@ -82,7 +82,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
 
       if (username.isNotEmpty) {
         FirebaseFirestore.instance
-            .collection('koleksi')
+            .collection('Collection')
             .doc(widget.id)
             .collection('komentar')
             .add({
@@ -108,7 +108,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _articleSnapshot?['judul'] ?? '',
+          _articleSnapshot?['title'] ?? '',
           style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.green,
@@ -214,7 +214,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
               ),
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('koleksi')
+                    .collection('Collection')
                     .doc(widget.id)
                     .collection('komentar')
                     .orderBy('timestamp', descending: true)

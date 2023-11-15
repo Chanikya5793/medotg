@@ -102,7 +102,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
         ),
         title: Row(
           mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // memberi spasi antar widget
+              MainAxisAlignment.spaceBetween,// give space between widgets
           children: [
             const Icon(Icons.tips_and_updates_outlined, size: 40),
             const Text('Jelajah'),
@@ -126,10 +126,10 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Menambahkan carousel di sini
+            /// Add carousel here
             StreamBuilder<QuerySnapshot>(
               stream:
-                  FirebaseFirestore.instance.collection('koleksi').snapshots(),
+                  FirebaseFirestore.instance.collection('Collection').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const CircularProgressIndicator();
@@ -149,7 +149,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                             child: Column(
                               children: [
                                 Image.network(doc['imageUrl']),
-                                Text(doc['judul']),
+                                Text(doc['title']),
                               ],
                             ),
                           ),
@@ -177,7 +177,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Artikel Terkini 🔥',
+              'Latest Articles 🔥',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -187,26 +187,26 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('koleksi')
-                    .where('judul', isGreaterThanOrEqualTo: _searchKeyword)
+                    .collection('Collection')
+                    .where('title', isGreaterThanOrEqualTo: _searchKeyword)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return const Text('Terjadi kesalahan');
+                    return const Text('There is an error');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   }
 
-                  // Mengambil data artikel dari snapshot
+                  // Retrieve article data from snapshot
                   List<DocumentSnapshot> articles = snapshot.data!.docs;
 
                   return ListView.builder(
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
-                      // Mengambil data judul dan imageUrl dari artikel
-                      String judul = articles[index]['judul'];
+                      // Retrieve title and imageUrl data from the article
+                      String title = articles[index]['title'];
                       String imageUrl = articles[index]['imageUrl'];
                       Timestamp timestamp = articles[index]['date'];
                       DateTime date = timestamp.toDate();
@@ -235,9 +235,9 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                             ),
                           ),
                         ),
-                        title: Text(judul),
+                        title: Text(title),
                         subtitle: Text(
-                            'Tanggal rilis: $formattedDate'), // masukan nama author yang buat artikel nya
+                            'Tanggal rilis: $formattedDate'), // insert the name of the author who made the article
                       );
                     },
                   );
@@ -251,7 +251,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            // Menampilkan header drawer yang berisi informasi profil pengguna
+          // Displays a drawer header containing user profile information
             const UserProfileDrawerHeader(),
 
             // Menu Home

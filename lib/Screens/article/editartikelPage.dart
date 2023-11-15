@@ -38,14 +38,14 @@ class EditArtikelPageState extends State<EditArtikelPage> {
 
   void _fetchData() async {
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('koleksi')
+        .collection('Collection')
         .doc(widget.documentId)
         .get();
 
     if (snapshot.exists) {
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
       setState(() {
-        _titleController.text = data['judul'];
+        _titleController.text = data['title'];
         _descriptionController.text = data['deskripsi'];
         _imageUrlController.text = data['imageUrl'];
       });
@@ -59,10 +59,10 @@ class EditArtikelPageState extends State<EditArtikelPage> {
 
     if (title.isNotEmpty && description.isNotEmpty && imageUrl.isNotEmpty) {
       await FirebaseFirestore.instance
-          .collection('koleksi')
+          .collection('Collection')
           .doc(widget.documentId)
           .update({
-        'judul': title,
+        'title': title,
         'deskripsi': description,
         'imageUrl': imageUrl,
       });

@@ -78,11 +78,11 @@ class _ArtikelPageState extends State<ArtikelPage> {
               height: 200,
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('koleksi')
+                    .collection('Collection')
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return const Text('Terjadi kesalahan');
+                    return const Text('There is an error');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -96,14 +96,14 @@ class _ArtikelPageState extends State<ArtikelPage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
-                      // Mengambil data judul dan imageUrl dari artikel
-                      String judul = articles[index]['judul'];
+                      // Mengambil data title dan imageUrl dari artikel
+                      String title = articles[index]['title'];
                       String imageUrl = articles[index]['imageUrl'];
 
                       return Column(
                         children: [
                           Text(
-                            judul,
+                            title,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,

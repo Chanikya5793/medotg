@@ -26,7 +26,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
 
   File? _imageFile;
   final _storage = FirebaseStorage.instance;
-  final _articleCollection = FirebaseFirestore.instance.collection('koleksi');
+  final _articleCollection = FirebaseFirestore.instance.collection('Collection');
 
   Future<void> _pickImage() async {
     final pickedFile =
@@ -54,14 +54,14 @@ class _AddArticlePageState extends State<AddArticlePage> {
   Future<void> _saveData() async {
     try {
       if (_formKey.currentState!.validate()) {
-        String judul = _title.text;
+        String title = _title.text;
         String deskripsi = _description.text;
 
         String imageUrl = await _uploadImageToFirebase();
 
         await _articleCollection.add({
           'uid': FirebaseAuth.instance.currentUser!.uid,
-          'judul': judul,
+          'title': title,
           'deskripsi': deskripsi,
           'imageUrl': imageUrl,
           'date': Timestamp.now(),
@@ -71,7 +71,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
         Get.off(const HomeScreenBody());
       }
     } catch (e) {
-      Get.snackbar('Error', 'Terjadi kesalahan saat menambahkan data');
+      Get.snackbar('Error', 'There is an error saat menambahkan data');
     }
   }
 
