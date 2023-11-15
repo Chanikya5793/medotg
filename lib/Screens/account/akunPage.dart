@@ -16,7 +16,7 @@ class AkunPageState extends State<AkunPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   late User user;
-  String? username, email, mobileNumber, userType, collegeName;
+  String? username, email, mobileNumber, userType, hospitalName;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class AkunPageState extends State<AkunPage> {
         email = userData["email"];
         mobileNumber = userData["mobileNumber"];
         userType = userData["userType"];
-        collegeName = userData["collegeName"];
+        hospitalName = userData["hospitalName"];
       });
     }
   }
@@ -85,8 +85,8 @@ class AkunPageState extends State<AkunPage> {
                         case 'mobileNumber':
                           mobileNumber = value;
                           break;
-                        case 'collegeName':
-                          collegeName = value;
+                        case 'hospitalName':
+                          hospitalName = value;
                           break;
                         case 'userType':
                           userType = value;
@@ -145,7 +145,7 @@ class AkunPageState extends State<AkunPage> {
             var username = data['name'];
             var email = data['email'];
             var mobileNumber = data['mobileNumber'];
-            var collegeName = data['collegeName'];
+            var hospitalName = data['hospitalName'];
             var userType = data['userType'];
 
             return ListView(
@@ -172,9 +172,9 @@ class AkunPageState extends State<AkunPage> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.school),
-                  title: const Text('College Name'),
-                  subtitle: Text(collegeName ?? 'Loading...'),
-                  onTap: () => _showEditDialog('collegeName'),
+                  title: const Text('Hospital Name'),
+                  subtitle: Text(hospitalName ?? 'Loading...'),
+                  onTap: () => _showEditDialog('hospitalName'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.person),

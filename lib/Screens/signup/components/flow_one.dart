@@ -11,7 +11,7 @@ import 'package:medotg/controller/sign_up_controller.dart';
 
 import '../../medotg/medotg.dart';
 
-List<String> list = <String>['Pembaca', 'Penulis'];
+List<String> list = <String>['Employee', 'Patient'];
 
 class SignUpOne extends StatefulWidget {
   const SignUpOne({super.key});

@@ -67,11 +67,11 @@ class SignUpController extends GetxController {
     update();
   }
 
-  String? _collegeName;
-  String? get collegeName => _collegeName;
-  void setCollegeName(String? text) {
-    _collegeName = text;
-    debugPrint("Updated collegeName: $collegeName");
+  String? _hospitalName;
+  String? get hospitalName => _hospitalName;
+  void setHospitalName(String? text) {
+    _hospitalName = text;
+    debugPrint("Updated hospitalName: $hospitalName");
     update();
   }
 
@@ -110,7 +110,7 @@ class SignUpController extends GetxController {
       'email': email,
       'password': password,
       'mobileNumber': mobileNumber,
-      'collegeName': collegeName,
+      'hospitalName': hospitalName,
       'imageUrl': imageUrl,
     });
 

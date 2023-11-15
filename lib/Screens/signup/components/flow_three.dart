@@ -63,7 +63,7 @@ class _SignUpThreeState extends State<SignUpThree> {
       allowMultiple: false,
       withData: true,
       type: FileType.custom,
-      allowedExtensions: ['pdf'],
+      allowedExtensions: ['pdf', 'jpg', 'png', 'jpeg'],
     );
     if (result != null) {
       Uint8List? fileBytes = result.files.first.bytes;
@@ -116,7 +116,7 @@ class _SignUpThreeState extends State<SignUpThree> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (signUpController.userType == "Student") ...[
+                  if (signUpController.userType == "Patient") ...[
                     Text(
                       "Admission Year",
                       style: GoogleFonts.poppins(
@@ -152,9 +152,9 @@ class _SignUpThreeState extends State<SignUpThree> {
                         filled: true,
                       ),
                     ),
-                  ] else if (signUpController.userType == "Alumni") ...[
+                  ] else if (signUpController.userType == "Employee") ...[
                     Text(
-                      "Passout Year",
+                      "Joining Date",
                       style: GoogleFonts.poppins(
                         fontSize: 18,
                         color: HexColor("#8d8d8d"),
@@ -247,7 +247,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                     height: 5,
                   ),
                   Text(
-                    "Resume (Optional)",
+                    "Resume ",
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       color: HexColor("#8d8d8d"),

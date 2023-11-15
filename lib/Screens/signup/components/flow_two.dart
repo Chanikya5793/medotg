@@ -16,7 +16,7 @@ class SignUpTwo extends StatefulWidget {
 class _SignUpTwoState extends State<SignUpTwo> {
   final mobileNumberController = TextEditingController().obs;
   final nameController = TextEditingController().obs;
-  final collegeNameContoller = TextEditingController().obs;
+  final hospitalNameContoller = TextEditingController().obs;
   SignUpController signUpController = Get.put(SignUpController());
   FlowController flowController = Get.put(FlowController());
   @override
@@ -113,7 +113,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                     controller: nameController.value,
                     cursorColor: HexColor("#4f4f4f"),
                     decoration: InputDecoration(
-                      hintText: "Jack Smith",
+                      hintText: "ABC XYZ",
                       fillColor: HexColor("#f0f3f1"),
                       contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       hintStyle: GoogleFonts.poppins(
@@ -128,7 +128,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                     ),
                   ),
                   Text(
-                    "College Name",
+                    "Hospital Name",
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       color: HexColor("#8d8d8d"),
@@ -139,15 +139,15 @@ class _SignUpTwoState extends State<SignUpTwo> {
                   ),
                   TextField(
                     onSubmitted: (value) {
-                      signUpController.setCollegeName(value);
+                      signUpController.setHospitalName(value);
                     },
                     onChanged: (value) {
-                      signUpController.setCollegeName(value);
+                      signUpController.setHospitalName(value);
                     },
-                    controller: collegeNameContoller.value,
+                    controller: hospitalNameContoller.value,
                     cursorColor: HexColor("#4f4f4f"),
                     decoration: InputDecoration(
-                      hintText: "ABC College",
+                      hintText: "ABC Hospital",
                       fillColor: HexColor("#f0f3f1"),
                       contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       hintStyle: GoogleFonts.poppins(
@@ -169,7 +169,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
                     onPressed: () {
                       if (signUpController.mobileNumber != null &&
                           signUpController.name != null &&
-                          signUpController.collegeName != null) {
+                          signUpController.hospitalName != null) {
                         flowController.setFlow(3);
                       } else {
                         Get.snackbar("Error", "Please fill all the fields");

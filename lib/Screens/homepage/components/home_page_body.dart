@@ -78,10 +78,11 @@ class UserProfileDrawerHeaderState extends State<UserProfileDrawerHeader> {
 }
 
 class HomeScreenBodyState extends State<HomeScreenBody> {
-  String _searchKeyword = '';
-  final TextEditingController _searchController = TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  final TextEditingController _searchController = TextEditingController();
+  String _searchKeyword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -146,12 +147,14 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           child: Card(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 Image.network(doc['imageUrl']),
                                 Text(doc['title']),
                               ],
                             ),
+                           ),
                           ),
                         );
                       },
