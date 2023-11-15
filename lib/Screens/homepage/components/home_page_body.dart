@@ -154,7 +154,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                                 Text(doc['title']),
                               ],
                             ),
-                           ),
+                          ),
                           ),
                         );
                       },
