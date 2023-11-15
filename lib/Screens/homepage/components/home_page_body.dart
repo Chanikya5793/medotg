@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login/Screens/account/akunPage.dart';
-import 'package:login/Screens/article/addArtikelPage.dart';
-import 'package:login/Screens/article/detailArtikelPage.dart';
+import 'package:medotg/Screens/account/akunPage.dart';
+import 'package:medotg/Screens/article/addArtikelPage.dart';
+import 'package:medotg/Screens/article/detailArtikelPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:login/Screens/login/login.dart';
+import 'package:medotg/Screens/medotg/medotg.dart';
 
 class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({Key? key}) : super(key: key);

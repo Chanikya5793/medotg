@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:login/components/my_button.dart';
-import 'package:login/controller/flow_controller.dart';
-import 'package:login/controller/sign_up_controller.dart';
+import 'package:medotg/components/my_button.dart';
+import 'package:medotg/controller/flow_controller.dart';
+import 'package:medotg/controller/sign_up_controller.dart';
 
 class SignUpTwo extends StatefulWidget {
   const SignUpTwo({super.key});

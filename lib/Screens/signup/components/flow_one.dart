@@ -5,11 +5,11 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:email_validator/email_validator.dart';
 
 // ignore: unused_import
-import 'package:login/components/my_button.dart';
-import 'package:login/controller/flow_controller.dart';
-import 'package:login/controller/sign_up_controller.dart';
+import 'package:medotg/components/my_button.dart';
+import 'package:medotg/controller/flow_controller.dart';
+import 'package:medotg/controller/sign_up_controller.dart';
 
-import '../../login/login.dart';
+import '../../medotg/medotg.dart';
 
 List<String> list = <String>['Pembaca', 'Penulis'];
 

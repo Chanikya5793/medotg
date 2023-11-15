@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:login/controller/flow_controller.dart';
+import 'package:medotg/controller/flow_controller.dart';
 
 import 'flow_one.dart';
 import 'flow_three.dart';

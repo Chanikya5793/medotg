@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login/Screens/homepage/components/home_page_body.dart';
+import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 class EditArtikelPage extends StatefulWidget {
   final String documentId;

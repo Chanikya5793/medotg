@@ -5,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/Screens/homepage/home_page.dart';
+import 'package:medotg/Screens/homepage/home_page.dart';
 
-import 'package:login/models/file_model.dart';
+import 'package:medotg/models/file_model.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();

@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:login/Screens/article/editartikelPage.dart';
-import 'package:login/Screens/homepage/components/home_page_body.dart';
+import 'package:medotg/Screens/article/editartikelPage.dart';
+import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DetailArtikelPage extends StatefulWidget {

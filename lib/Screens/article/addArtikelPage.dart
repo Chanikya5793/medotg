@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:login/Screens/homepage/components/home_page_body.dart';
+import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 class AddArticlePage extends StatefulWidget {
   const AddArticlePage({Key? key}) : super(key: key);
