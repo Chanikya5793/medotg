@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:medotg/Screens/account/akunPage.dart';
+import 'package:medotg/Screens/account/accountPage.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 import 'addRecordPage.dart';
@@ -382,7 +382,7 @@ class _RecordPageState extends State<RecordPage> {
             } else if (index == 2) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const AkunPage()),
+                MaterialPageRoute(builder: (context) => const AccountPage()),
               );
             }
           },

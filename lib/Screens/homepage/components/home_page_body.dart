@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medotg/Screens/account/akunPage.dart';
+import 'package:medotg/Screens/account/accountPage.dart';
 import 'package:medotg/Screens/article/addRecordPage.dart';
 import 'package:medotg/Screens/article/detailRecordPage.dart';
 import 'package:medotg/Screens/login/login.dart';
@@ -300,7 +300,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AkunPage()),
+                  MaterialPageRoute(builder: (context) => const AccountPage()),
                 );
               },
             ),

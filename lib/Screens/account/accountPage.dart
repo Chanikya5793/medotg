@@ -5,14 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
-class AkunPage extends StatefulWidget {
-  const AkunPage({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({super.key});
 
   @override
-  AkunPageState createState() => AkunPageState();
+  AccountPageState createState() => AccountPageState();
 }
 
-class AkunPageState extends State<AkunPage> {
+class AccountPageState extends State<AccountPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   late User user;
