@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
-class EditArtikelPage extends StatefulWidget {
+class EditRecordPage extends StatefulWidget {
   final String documentId;
 
-  const EditArtikelPage({super.key, required this.documentId});
+  const EditRecordPage({super.key, required this.documentId});
 
   @override
-  EditArtikelPageState createState() => EditArtikelPageState();
+  EditRecordPageState createState() => EditRecordPageState();
 }
 
-class EditArtikelPageState extends State<EditArtikelPage> {
+class EditRecordPageState extends State<EditRecordPage> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _imageUrlController;
@@ -95,7 +95,7 @@ class EditArtikelPageState extends State<EditArtikelPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(Icons.edit_outlined, size: 40),
-            Text('Edit Artikel'),
+            Text('Edit Record'),
             SizedBox(
               width: 180,
             ),
@@ -115,7 +115,7 @@ class EditArtikelPageState extends State<EditArtikelPage> {
                     Icons.title,
                     color: Colors.brown,
                   ),
-                  labelText: 'Masukkan Judul Artikel',
+                  labelText: 'Masukkan Judul Record',
                   errorStyle: TextStyle(color: Colors.grey),
                 ),
                 maxLength: 25,
@@ -129,7 +129,7 @@ class EditArtikelPageState extends State<EditArtikelPage> {
                     Icons.description_outlined,
                     color: Colors.green,
                   ),
-                  labelText: 'Masukkan deskripsi artikel',
+                  labelText: 'Masukkan deskripsi record',
                   errorStyle: TextStyle(color: Colors.grey),
                 ),
                 maxLines: 10,

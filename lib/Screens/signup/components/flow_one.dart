@@ -9,7 +9,7 @@ import 'package:medotg/components/my_button.dart';
 import 'package:medotg/controller/flow_controller.dart';
 import 'package:medotg/controller/sign_up_controller.dart';
 
-import '../../medotg/medotg.dart';
+import '../../login/login.dart';
 
 List<String> list = <String>['Employee', 'Patient'];
 

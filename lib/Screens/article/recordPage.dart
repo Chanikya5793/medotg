@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:medotg/Screens/account/akunPage.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
-import 'addArtikelPage.dart';
-import 'detailArtikelPage.dart';
+import 'addRecordPage.dart';
+import 'detailRecordPage.dart';
 
-class ArtikelPage extends StatefulWidget {
-  const ArtikelPage({Key? key}) : super(key: key);
+class RecordPage extends StatefulWidget {
+  const RecordPage({Key? key}) : super(key: key);
 
   @override
-  State<ArtikelPage> createState() => _ArtikelPageState();
+  State<RecordPage> createState() => _RecordPageState();
 }
 
-class _ArtikelPageState extends State<ArtikelPage> {
+class _RecordPageState extends State<RecordPage> {
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
               MainAxisAlignment.spaceBetween, // memberi spasi antar widget
           children: [
             const Icon(Icons.tips_and_updates_outlined, size: 40),
-            const Text('Jelajah'),
+            const Text('MEDOTG'),
             const SizedBox(
               width: 220,
             ),
@@ -66,7 +66,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: Text(
-                'Artikel Dibuat 🔥',
+                'Record Dibuat 🔥',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -89,14 +89,14 @@ class _ArtikelPageState extends State<ArtikelPage> {
                     return const CircularProgressIndicator();
                   }
 
-                  // Mengambil data artikel dari snapshot
+                  // Mengambil data record dari snapshot
                   List<DocumentSnapshot> articles = snapshot.data!.docs;
 
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
-                      // Mengambil data title dan imageUrl dari artikel
+                      // Mengambil data title dan imageUrl dari record
                       String title = articles[index]['title'];
                       String imageUrl = articles[index]['imageUrl'];
 
@@ -127,7 +127,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailArtikelPage(
+                                    builder: (context) => DetailRecordPage(
                                       id: articles[index].id,
                                     ),
                                   ),
@@ -361,7 +361,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.tips_and_updates),
-              label: 'Jelajah',
+              label: 'MEDOTG',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
@@ -377,7 +377,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
             } else if (index == 1) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ArtikelPage()),
+                MaterialPageRoute(builder: (context) => const RecordPage()),
               );
             } else if (index == 2) {
               Navigator.pushReplacement(

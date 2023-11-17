@@ -1,3 +1,3 @@
 import 'package:get/get.dart';
 
-class ArtikelController extends GetxController {}
+class RecordController extends GetxController {}

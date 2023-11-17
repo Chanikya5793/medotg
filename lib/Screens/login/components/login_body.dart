@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:medotg/components/my_button.dart';
 import 'package:medotg/components/my_textfield.dart';
 
+import '../../homepage/components/home_page_body.dart';
 import '../../signup/sign_up.dart';
 
 class LoginBodyScreen extends StatefulWidget {
@@ -28,6 +29,12 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
       // Log in using email and password
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+
+      // Navigate to home screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreenBody()), // replace HomeScreen() with your home screen widget
+      );
     } on FirebaseAuthException catch (e) {
       showErrorMessage(e.code);
     }

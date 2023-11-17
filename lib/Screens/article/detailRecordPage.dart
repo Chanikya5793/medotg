@@ -1,21 +1,21 @@
 // ignore_for_file: unused_field, file_names, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medotg/Screens/article/editartikelPage.dart';
+import 'package:medotg/Screens/article/editrecordPage.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class DetailArtikelPage extends StatefulWidget {
+class DetailRecordPage extends StatefulWidget {
   final String id;
 
-  const DetailArtikelPage({Key? key, required this.id}) : super(key: key);
+  const DetailRecordPage({Key? key, required this.id}) : super(key: key);
   @override
-  State<DetailArtikelPage> createState() => _DetailArtikelPageState();
+  State<DetailRecordPage> createState() => _DetailRecordPageState();
 }
 
-class _DetailArtikelPageState extends State<DetailArtikelPage> {
+class _DetailRecordPageState extends State<DetailRecordPage> {
   DocumentSnapshot? _articleSnapshot;
   DocumentSnapshot? _userSnapshot;
   User? user = FirebaseAuth.instance.currentUser;
@@ -28,7 +28,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
   @override
   void initState() {
     super.initState();
-    // Mengambil data artikel dari Firestore
+    // Mengambil data record dari Firestore
     _fetchArticle();
   }
 
@@ -44,7 +44,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
           _articleSnapshot = snapshot;
         });
       } else {
-        print('Artikel tidak ditemukan');
+        print('Record tidak ditemukan');
       }
     } catch (e) {
       print('Error: $e');
@@ -142,7 +142,7 @@ class _DetailArtikelPageState extends State<DetailArtikelPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        EditArtikelPage(documentId: widget.id)),
+                        EditRecordPage(documentId: widget.id)),
               );
             },
           ),

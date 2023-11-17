@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'components/medotg_body.dart';
+import 'components/login_body.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

@@ -1,12 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:medotg/Screens/account/akunPage.dart';
-import 'package:medotg/Screens/article/addArtikelPage.dart';
-import 'package:medotg/Screens/article/detailArtikelPage.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:medotg/Screens/medotg/medotg.dart';
+import 'package:medotg/Screens/account/akunPage.dart';
+import 'package:medotg/Screens/article/addRecordPage.dart';
+import 'package:medotg/Screens/article/detailRecordPage.dart';
+import 'package:medotg/Screens/login/login.dart';
 
 class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
@@ -83,6 +85,20 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
 
   final TextEditingController _searchController = TextEditingController();
   String _searchKeyword = '';
+  String userType = '';
+    @override
+    void initState() {
+      super.initState();
+      fetchUserType();
+    }
+
+    Future<void> fetchUserType() async {
+      var doc = await firestore.collection('user').doc(auth.currentUser!.uid).get();
+      setState(() {
+        userType = doc['userType'];
+      });
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,16 +122,24 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
               MainAxisAlignment.spaceBetween,// give space between widgets
           children: [
             const Icon(Icons.tips_and_updates_outlined, size: 40),
-            const Text('Jelajah'),
+            const Text('MEDOTG'),
             const SizedBox(
               width: 100,
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddArticlePage()),
-                );
+                if (userType == 'Patient') {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("You Don't Have Access to Upload"),
+                    ),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AddArticlePage()),
+                  );
+                }
               },
               child: const Icon(Icons.post_add_outlined),
             ),
@@ -180,7 +204,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Latest Articles 🔥',
+              'Latest Records 🔥',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -221,7 +245,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetailArtikelPage(
+                              builder: (context) => DetailRecordPage(
                                 id: articles[index].id,
                               ),
                             ),
@@ -240,7 +264,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                         ),
                         title: Text(title),
                         subtitle: Text(
-                            'Tanggal rilis: $formattedDate'), // insert the name of the author who made the article
+                            'Release date: $formattedDate'), // insert the name of the author who made the article
                       );
                     },
                   );

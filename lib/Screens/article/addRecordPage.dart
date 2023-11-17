@@ -98,7 +98,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(Icons.post_add_outlined, size: 40),
-            Text('Add Artikel'),
+            Text('Add Record'),
             SizedBox(width: 180),
           ],
         ),
@@ -117,7 +117,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       controller: _title,
                       decoration: const InputDecoration(
                         icon: Icon(Icons.title, color: Colors.brown),
-                        labelText: 'Masukkan Judul Artikel',
+                        labelText: 'Masukkan Judul Record',
                         errorStyle: TextStyle(color: Colors.grey),
                       ),
                       maxLength: 25,
@@ -137,7 +137,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       decoration: const InputDecoration(
                         icon: Icon(Icons.description_outlined,
                             color: Colors.green),
-                        labelText: 'Masukkan deskripsi artikel tersebut',
+                        labelText: 'Masukkan deskripsi record tersebut',
                         errorStyle: TextStyle(color: Colors.grey),
                       ),
                       autofocus: false,

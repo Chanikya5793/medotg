@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import 'article.dart';
 
-class artikel with ChangeNotifier {
+class record with ChangeNotifier {
   final List<Article> _allarticle = [];
   List<Article> get allArticle => _allarticle;
 
