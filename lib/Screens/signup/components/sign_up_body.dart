@@ -54,7 +54,7 @@ class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
                       ),
                       child: GetBuilder<FlowController>(
                         builder: (context) {
-                          // Menampilkan tampilan sesuai dengan alur saat ini
+                          // Displays the view according to the current flow
                           if (flowController.currentFlow == 1) {
                             return const SignUpOne();
                           } else if (flowController.currentFlow == 2) {

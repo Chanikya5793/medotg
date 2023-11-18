@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -94,9 +94,15 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
 
     Future<void> fetchUserType() async {
       var doc = await firestore.collection('user').doc(auth.currentUser!.uid).get();
-      setState(() {
-        userType = doc['userType'];
-      });
+      if (doc.exists && doc.data()?.containsKey('userType') == true) {
+        if (mounted) {
+          setState(() {
+            userType = doc.data()?['userType'] ?? '';
+          });
+        }
+      } else {
+        print('Document does not exist or does not contain userType field');
+      }
     }
 
 

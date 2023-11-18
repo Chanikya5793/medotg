@@ -66,7 +66,7 @@ class _RecordPageState extends State<RecordPage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: Text(
-                'Record Dibuat 🔥',
+                'Record Made 🔥',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class _RecordPageState extends State<RecordPage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: Text(
-                'Berita Seputar Kesehatan',
+                'Summary About Health',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

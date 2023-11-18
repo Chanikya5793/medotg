@@ -30,7 +30,7 @@ class _EditprofileState extends State<Editprofile> {
         ),
         title: const Row(
           mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // memberi spasi antar widget
+              MainAxisAlignment.spaceBetween,// put space between widgets
           children: [
             Icon(Icons.person, size: 40),
             Text('Edit Profile'),

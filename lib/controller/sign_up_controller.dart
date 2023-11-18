@@ -93,15 +93,15 @@ class SignUpController extends GetxController {
 
   Future postSignUpDetails() async {
     String newDocId =
-        FirebaseAuth.instance.currentUser?.uid ?? ''; // ID dokumen yang baru
+        FirebaseAuth.instance.currentUser?.uid ?? ''; // New document ID
 
-// Membuat dokumen baru dengan ID baru
+// Create a new document with a new ID
     DocumentReference newDocRef =
         FirebaseFirestore.instance.collection('user').doc(newDocId);
 
     String imageUrl = await uploadImageFile(); // Upload image and get URL
 
-// Menyimpan data ke dokumen baru
+// Save data to a new document
     await newDocRef.set({
       'docId': newDocId,
       'uid': FirebaseAuth.instance.currentUser!.uid,

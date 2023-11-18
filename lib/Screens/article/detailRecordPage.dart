@@ -28,7 +28,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
   @override
   void initState() {
     super.initState();
-    // Mengambil data record dari Firestore
+    // Retrieving data records from firestore
     _fetchArticle();
   }
 
@@ -44,7 +44,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
           _articleSnapshot = snapshot;
         });
       } else {
-        print('Record tidak ditemukan');
+        print('Record not found');
       }
     } catch (e) {
       print('Error: $e');
@@ -84,9 +84,9 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
         FirebaseFirestore.instance
             .collection('Collection')
             .doc(widget.id)
-            .collection('komentar')
+            .collection('comment')
             .add({
-          'komentar': _commentController.text,
+          'comment': _commentController.text,
           'timestamp': Timestamp.now(),
           'username': username,
         }).then((_) {
@@ -168,7 +168,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Deskripsi',
+                    'Description',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -189,7 +189,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
               ),
               const SizedBox(height: 16),
               Text(
-                _articleSnapshot?['deskripsi'] ?? '',
+                _articleSnapshot?['description'] ?? '',
                 style: const TextStyle(
                   fontSize: 18,
                 ),
@@ -197,7 +197,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
               TextField(
                 controller: _commentController,
                 decoration: InputDecoration(
-                  labelText: 'Tambahkan komentar',
+                  labelText: 'Add comments',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.send),
                     onPressed: _sendComment,
@@ -206,7 +206,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
               ),
               const SizedBox(height: 16),
               const Text(
-                'Komentar',
+                'Comment',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -216,7 +216,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
                 stream: FirebaseFirestore.instance
                     .collection('Collection')
                     .doc(widget.id)
-                    .collection('komentar')
+                    .collection('comment')
                     .orderBy('timestamp', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
@@ -235,14 +235,14 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
                     itemBuilder: (context, index) {
                       DocumentSnapshot comment = snapshot.data!.docs[index];
                       String username = comment['username'];
-                      String komentar = comment['komentar'];
+                      String commentText = comment['comment'];
                       Timestamp timestamp = comment['timestamp'];
                       DateTime dateTime = timestamp.toDate();
                       String formattedDate =
                           DateFormat('dd/MM/yyyy HH:mm').format(dateTime);
 
                       return ListTile(
-                        title: Text('$username: $komentar'),
+                        title: Text('$username: $commentText'),
                         subtitle: Text(formattedDate),
                       );
                     },

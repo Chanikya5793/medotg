@@ -25,7 +25,7 @@ class AccountPageState extends State<AccountPage> {
     _loadUserProfile();
   }
 
-  // Metode untuk mengambil dan memuat data profil pengguna dari Firestore
+  // Method to retrieve and load user profile data from Firestore
   Future<void> _loadUserProfile() async {
     var docSnapshot = await firestore.collection("user").doc(user.uid).get();
     if (docSnapshot.exists) {
@@ -40,7 +40,7 @@ class AccountPageState extends State<AccountPage> {
     }
   }
 
-  // Metode untuk menampilkan dialog pengeditan dan menyimpan perubahan data profil
+  // Method for displaying the editing dialog and saving profile data changes
   void _showEditDialog(String field) {
     showDialog(
       context: context,
@@ -74,7 +74,7 @@ class AccountPageState extends State<AccountPage> {
                         .doc(user.uid)
                         .update({field: value});
                     setState(() {
-                      // Memperbarui nilai bidang yang sesuai di state
+                      // Updates the values ​​of the appropriate fields in state
                       switch (field) {
                         case 'name':
                           username = value;
@@ -112,7 +112,7 @@ class AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Menampilkan tombol kembali dan judul halaman
+        // Displays the back button and page title
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -127,13 +127,13 @@ class AccountPageState extends State<AccountPage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Metode yang akan dipanggil saat tombol pengaturan diklik
+              // Method to be called when the settings button is clicked
             },
           ),
         ],
       ),
       body: StreamBuilder(
-        // StreamBuilder untuk mendapatkan data profil pengguna dari Firestore
+      // StreamBuilder to get user profile data from Firestore
         stream: FirebaseFirestore.instance
             .collection('user')
             .where('uid', isEqualTo: auth.currentUser!.uid)
@@ -150,13 +150,13 @@ class AccountPageState extends State<AccountPage> {
 
             return ListView(
               children: <Widget>[
-                // Item daftar untuk setiap bidang profil pengguna
+                // List items for each user profile field
                 ListTile(
                   leading: const Icon(Icons.account_circle),
                   title: const Text('Username'),
                   subtitle: Text(username ?? 'Loading...'),
                   onTap: () => _showEditDialog(
-                      'name'), // Menampilkan dialog pengeditan saat item diklik
+                      'name'), // Displays an editing dialog when the item is clicked
                 ),
                 ListTile(
                   leading: const Icon(Icons.email),

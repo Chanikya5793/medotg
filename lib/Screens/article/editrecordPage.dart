@@ -46,7 +46,7 @@ class EditRecordPageState extends State<EditRecordPage> {
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
       setState(() {
         _titleController.text = data['title'];
-        _descriptionController.text = data['deskripsi'];
+        _descriptionController.text = data['description'];
         _imageUrlController.text = data['imageUrl'];
       });
     }
@@ -63,7 +63,7 @@ class EditRecordPageState extends State<EditRecordPage> {
           .doc(widget.documentId)
           .update({
         'title': title,
-        'deskripsi': description,
+        'description': description,
         'imageUrl': imageUrl,
       });
 
@@ -115,7 +115,7 @@ class EditRecordPageState extends State<EditRecordPage> {
                     Icons.title,
                     color: Colors.brown,
                   ),
-                  labelText: 'Masukkan Judul Record',
+                  labelText: 'Enter a Record Title',
                   errorStyle: TextStyle(color: Colors.grey),
                 ),
                 maxLength: 25,
@@ -129,7 +129,7 @@ class EditRecordPageState extends State<EditRecordPage> {
                     Icons.description_outlined,
                     color: Colors.green,
                   ),
-                  labelText: 'Masukkan deskripsi record',
+                  labelText: 'Enter a record description',
                   errorStyle: TextStyle(color: Colors.grey),
                 ),
                 maxLines: 10,
@@ -145,7 +145,7 @@ class EditRecordPageState extends State<EditRecordPage> {
                     Icons.image_outlined,
                     color: Colors.green,
                   ),
-                  labelText: 'Masukkan URL Gambar',
+                  labelText: 'Enter Image URL',
                   errorStyle: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -161,7 +161,7 @@ class EditRecordPageState extends State<EditRecordPage> {
                     ),
                   ),
                 ),
-                child: const Text('Simpan'),
+                child: const Text('Save'),
               ),
             ],
           ),

@@ -55,23 +55,23 @@ class _AddArticlePageState extends State<AddArticlePage> {
     try {
       if (_formKey.currentState!.validate()) {
         String title = _title.text;
-        String deskripsi = _description.text;
+        String description = _description.text;
 
         String imageUrl = await _uploadImageToFirebase();
 
         await _articleCollection.add({
           'uid': FirebaseAuth.instance.currentUser!.uid,
           'title': title,
-          'deskripsi': deskripsi,
+          'description': description,
           'imageUrl': imageUrl,
           'date': Timestamp.now(),
         });
 
-        Get.snackbar('Sukses', 'Data berhasil ditambahkan');
+        Get.snackbar('Success', 'Data added successfully');
         Get.off(const HomeScreenBody());
       }
     } catch (e) {
-      Get.snackbar('Error', 'There is an error saat menambahkan data');
+      Get.snackbar('Error', 'There is an error when adding data');
     }
   }
 
@@ -117,14 +117,14 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       controller: _title,
                       decoration: const InputDecoration(
                         icon: Icon(Icons.title, color: Colors.brown),
-                        labelText: 'Masukkan Judul Record',
+                        labelText: 'Enter a Record Title',
                         errorStyle: TextStyle(color: Colors.grey),
                       ),
                       maxLength: 25,
                       maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'mohon masukkan judul';
+                          return 'please enter a title';
                         }
                         return null;
                       },
@@ -137,7 +137,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       decoration: const InputDecoration(
                         icon: Icon(Icons.description_outlined,
                             color: Colors.green),
-                        labelText: 'Masukkan deskripsi record tersebut',
+                        labelText: 'Enter a description of the record',
                         errorStyle: TextStyle(color: Colors.grey),
                       ),
                       autofocus: false,
@@ -145,7 +145,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       keyboardType: TextInputType.multiline,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'mohon masukkan deskripsi';
+                          return 'please enter a description';
                         }
                         return null;
                       },
