@@ -75,13 +75,12 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.green,
-        body: ListView(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(0, 400, 0, 0),
-          shrinkWrap: true,
+          //shrinkWrap: true,
           reverse: true,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+         // children: [
+          child: Column(
               children: [
                 Stack(
                   children: [
@@ -251,7 +250,6 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                 )
               ],
             ),
-          ],
         ),
       ),
     );
