@@ -168,19 +168,19 @@ class AccountPageState extends State<AccountPage> {
                   leading: const Icon(Icons.phone),
                   title: const Text('Mobile Number'),
                   subtitle: Text(mobileNumber ?? 'Loading...'),
-                  onTap: () => _showEditDialog('mobileNumber'),
+                  //onTap: () => _showEditDialog('mobileNumber'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.school),
                   title: const Text('Hospital Name'),
                   subtitle: Text(hospitalName ?? 'Loading...'),
-                  onTap: () => _showEditDialog('hospitalName'),
+                  //onTap: () => _showEditDialog('hospitalName'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.person),
                   title: const Text('User Type'),
                   subtitle: Text(userType ?? 'Loading...'),
-                  onTap: () => _showEditDialog('userType'),
+                  //onTap: () => _showEditDialog('userType'),
                 ),
               ],
             );

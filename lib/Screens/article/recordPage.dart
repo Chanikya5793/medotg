@@ -9,7 +9,7 @@ import 'addRecordPage.dart';
 import 'detailRecordPage.dart';
 
 class RecordPage extends StatefulWidget {
-  const RecordPage({Key? key}) : super(key: key);
+  const RecordPage({super.key});
 
   @override
   State<RecordPage> createState() => _RecordPageState();
@@ -40,7 +40,7 @@ class _RecordPageState extends State<RecordPage> {
         ),
         title: Row(
           mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // memberi spasi antar widget
+              MainAxisAlignment.spaceBetween, //provide space between widgets
           children: [
             const Icon(Icons.tips_and_updates_outlined, size: 40),
             const Text('MEDOTG'),
@@ -89,14 +89,14 @@ class _RecordPageState extends State<RecordPage> {
                     return const CircularProgressIndicator();
                   }
 
-                  // Mengambil data record dari snapshot
+                  //Retrieves data records from snapshots
                   List<DocumentSnapshot> articles = snapshot.data!.docs;
 
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
-                      // Mengambil data title dan imageUrl dari record
+                      // Retrieves title and imageUrl data from records
                       String title = articles[index]['title'];
                       String imageUrl = articles[index]['imageUrl'];
 
@@ -208,7 +208,7 @@ class _RecordPageState extends State<RecordPage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: Text(
-                'Tips Makanan Sehat',
+                'Healthy Food Tips',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -270,7 +270,7 @@ class _RecordPageState extends State<RecordPage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
               child: Text(
-                'Trick Olahraga Teratur',
+                'Regular Sports Tricks',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

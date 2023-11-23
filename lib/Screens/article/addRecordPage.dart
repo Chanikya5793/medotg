@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, non_constant_identifier_names
 
 import 'dart:io';
 
@@ -12,14 +12,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 class AddArticlePage extends StatefulWidget {
-  const AddArticlePage({Key? key}) : super(key: key);
+  const AddArticlePage({super.key});
 
   @override
   State<AddArticlePage> createState() => _AddArticlePageState();
 }
 
 class _AddArticlePageState extends State<AddArticlePage> {
-  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _searchQueryController = TextEditingController();
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
 
   final TextEditingController _title = TextEditingController();
   final TextEditingController _description = TextEditingController();
@@ -53,13 +55,22 @@ class _AddArticlePageState extends State<AddArticlePage> {
 
   Future<void> _saveData() async {
     try {
-      if (_formKey.currentState!.validate()) {
+      if (_formKey1.currentState!.validate() && _formKey2.currentState!.validate()) {
         String title = _title.text;
         String description = _description.text;
 
         String imageUrl = await _uploadImageToFirebase();
 
         await _articleCollection.add({
+          'uid': FirebaseAuth.instance.currentUser!.uid,
+          'title': title,
+          'description': description,
+          'imageUrl': imageUrl,
+          'date': Timestamp.now(),
+        });
+        final patientRecordsCollection = FirebaseFirestore.instance.collection('patients').doc(_searchQueryController.text).collection('records');
+
+        await patientRecordsCollection.add({
           'uid': FirebaseAuth.instance.currentUser!.uid,
           'title': title,
           'description': description,
@@ -99,17 +110,40 @@ class _AddArticlePageState extends State<AddArticlePage> {
           children: [
             Icon(Icons.post_add_outlined, size: 40),
             Text('Add Record'),
-            SizedBox(width: 180),
+            SizedBox(width: 120),
           ],
         ),
       ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(30),
               child: Form(
-                key: _formKey,
+                key: _formKey1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      controller: _searchQueryController,
+                      decoration: const InputDecoration(
+                        labelText: 'Search patients',
+                      ),
+                      onChanged: (value) {
+                        // Call setState to trigger a rebuild of the widget with the new search query
+                        setState(() {});
+                      },
+                    ),
+                    // ... rest of your code ...
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: Form(
+                key: _formKey2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -11,7 +11,7 @@ import 'package:medotg/Screens/article/detailRecordPage.dart';
 import 'package:medotg/Screens/login/login.dart';
 
 class HomeScreenBody extends StatefulWidget {
-  const HomeScreenBody({Key? key}) : super(key: key);
+  const HomeScreenBody({super.key});
 
   @override
   State<HomeScreenBody> createState() => HomeScreenBodyState();
@@ -154,6 +154,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -279,7 +280,8 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             ),
           ],
         ),
-      ),
+    ),
+  ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,

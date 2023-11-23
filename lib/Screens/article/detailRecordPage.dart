@@ -10,7 +10,7 @@ import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 class DetailRecordPage extends StatefulWidget {
   final String id;
 
-  const DetailRecordPage({Key? key, required this.id}) : super(key: key);
+  const DetailRecordPage({super.key, required this.id});
   @override
   State<DetailRecordPage> createState() => _DetailRecordPageState();
 }
@@ -24,12 +24,15 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
   bool isSaved = false; // status save
 
   final TextEditingController _commentController = TextEditingController();
+  // Add a new state variable for user type
+  String? userType;
 
   @override
   void initState() {
     super.initState();
     // Retrieving data records from firestore
     _fetchArticle();
+    _fetchUserType();
   }
 
   Future<void> _fetchArticle() async {
@@ -48,6 +51,21 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
       }
     } catch (e) {
       print('Error: $e');
+    }
+  }
+  // Fetch user type from Firestore
+  Future<void> _fetchUserType() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(user.uid)
+          .get();
+      if (snapshot.exists) {
+        setState(() {
+          userType = (snapshot.data() as Map<String, dynamic>)['userType'];
+        });
+      }
     }
   }
 
@@ -124,29 +142,31 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
               });
             },
           ),
-          IconButton(
-            onPressed: () {
-              _showDeleteConfirmationDialog();
-            },
-            icon: const Icon(Icons.delete),
-            color: Colors.black,
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.edit,
+        if (userType != 'Patient') ...[
+            IconButton(
+              onPressed: () {
+                _showDeleteConfirmationDialog();
+              },
+              icon: const Icon(Icons.delete),
               color: Colors.black,
             ),
-            onPressed: () {
-              // navigasi ke halaman edit
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        EditRecordPage(documentId: widget.id)),
-              );
-            },
-          ),
-        ],
+            IconButton(
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                // navigate to edit page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EditRecordPage(documentId: widget.id)),
+                );
+              },
+            ),
+          ],
+          ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -261,18 +281,18 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Konfirmasi Hapus'),
-            content: const Text('Apakah Anda yakin ingin menghapus data ini?'),
+            title: const Text('Confirm Delete'),
+            content: const Text('Are you sure you want to delete this data?'),
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context); // Tutup dialog
+                  Navigator.pop(context); // Close dialog
                 },
-                child: const Text('Batal'),
+                child: const Text('Cancel'),
               ),
               TextButton(
                 onPressed: () {
-                  _delete(); // Panggil fungsi untuk menghapus data
+                  _delete(); // Call the function to clear the data
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -280,7 +300,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
                   );
                 },
                 child: const Text(
-                  'Hapus',
+                  'Delete',
                   style: TextStyle(
                     color: Colors.red,
                   ),
