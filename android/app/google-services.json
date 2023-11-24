@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "848238305778",
-    "firebase_url": "https://medotg18-default-rtdb.firebaseio.com",
-    "project_id": "medotg18",
-    "storage_bucket": "medotg18.appspot.com"
+    "project_number": "959565015662",
+    "firebase_url": "https://medotg99-default-rtdb.firebaseio.com",
+    "project_id": "medotg99",
+    "storage_bucket": "medotg99.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:848238305778:android:affd6dc3203a3bd9758b6b",
+        "mobilesdk_app_id": "1:959565015662:android:e153f3297559c5e6b5947f",
         "android_client_info": {
-          "package_name": "com.example.medotg"
+          "package_name": "com.example.medotgg"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD2KibO1e1DcdH8_Cm2kvI2Jbvq6bUe-Dc"
+          "current_key": "AIzaSyD5HJW8ZTxcVVinbvGcMgPcXVTBPW5azEk"
         }
       ],
       "services": {

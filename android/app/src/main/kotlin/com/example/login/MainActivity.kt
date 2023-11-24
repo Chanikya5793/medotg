@@ -1,4 +1,4 @@
-package com.example.medotg
+package com.example.medotgg
 
 import io.flutter.embedding.android.FlutterActivity
 
