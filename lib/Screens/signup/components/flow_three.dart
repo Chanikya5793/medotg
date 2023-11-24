@@ -250,7 +250,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   const SizedBox(
                     height: 5,
                   ),
-                /*  Text(
+                  Text(
                     "Resume ",
                     style: GoogleFonts.poppins(
                       fontSize: 18,
@@ -299,7 +299,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   }),
                   const SizedBox(
                     height: 5,
-                  ), */
+                  ),
                   MyButton(
                     onPressed: () {
                       signUpController.postSignUpDetails();
