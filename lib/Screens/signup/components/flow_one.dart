@@ -35,7 +35,7 @@ class _SignUpOneState extends State<SignUpOne> {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+        padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
         child: Column(
           children: [
             Row(
