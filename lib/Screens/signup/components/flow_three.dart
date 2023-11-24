@@ -59,7 +59,7 @@ class _SignUpThreeState extends State<SignUpThree> {
     }
   }
 
-/*
+
   Future uploadPdfFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
@@ -75,7 +75,7 @@ class _SignUpThreeState extends State<SignUpThree> {
   }
     }
   }
-  */
+  
 
   FlowController flowController = Get.put(FlowController());
 
@@ -250,7 +250,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   const SizedBox(
                     height: 5,
                   ),
-                /*  Text(
+                  Text(
                     "Resume ",
                     style: GoogleFonts.poppins(
                       fontSize: 18,
@@ -299,7 +299,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   }),
                   const SizedBox(
                     height: 5,
-                  ), */
+                  ),
                   MyButton(
                     onPressed: () {
                       signUpController.postSignUpDetails();

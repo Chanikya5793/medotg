@@ -36,6 +36,7 @@ class _SignUpOneState extends State<SignUpOne> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
+        child: SingleChildScrollView( 
         child: Column(
           children: [
             Row(
@@ -253,6 +254,7 @@ class _SignUpOneState extends State<SignUpOne> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );
