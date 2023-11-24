@@ -35,8 +35,8 @@ class _SignUpOneState extends State<SignUpOne> {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 40, 30, 40),
-        child: SingleChildScrollView( 
+        padding: const EdgeInsets.fromLTRB(30, 60, 30, 40),
+        child: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -67,7 +67,7 @@ class _SignUpOneState extends State<SignUpOne> {
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 0, 20),
+              padding: const EdgeInsets.fromLTRB(15, 30, 10, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -132,7 +132,7 @@ class _SignUpOneState extends State<SignUpOne> {
                     },
                     cursorColor: HexColor("#4f4f4f"),
                     decoration: InputDecoration(
-                      hintText: "hello@gmail.com",
+                      hintText: "Your.email@gmail.com",
                       fillColor: HexColor("#f0f3f1"),
                       contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       hintStyle: GoogleFonts.poppins(
@@ -222,7 +222,7 @@ class _SignUpOneState extends State<SignUpOne> {
                   ),
                   // Login Navigation
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(35, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: Row(
                       children: [
                         Text(
