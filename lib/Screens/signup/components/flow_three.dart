@@ -59,7 +59,7 @@ class _SignUpThreeState extends State<SignUpThree> {
     }
   }
 
-/*
+
   Future uploadPdfFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
@@ -75,7 +75,7 @@ class _SignUpThreeState extends State<SignUpThree> {
   }
     }
   }
-  */
+  
 
   FlowController flowController = Get.put(FlowController());
 
