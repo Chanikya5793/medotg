@@ -204,7 +204,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
 
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(35, 0, 0, 0),
+                                        const EdgeInsets.fromLTRB(15, 0, 0, 0),
                                     child: Row(
                                       children: [
                                         Text("Don't have an account yet?",

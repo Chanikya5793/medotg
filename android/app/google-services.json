@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:959565015662:android:cc7212fecbf63df6b5947f",
+        "mobilesdk_app_id": "1:959565015662:android:e153f3297559c5e6b5947f",
         "android_client_info": {
-          "package_name": "com.example.medotg"
+          "package_name": "com.example.medotgg"
         }
       },
       "oauth_client": [],
