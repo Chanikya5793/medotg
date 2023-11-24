@@ -53,11 +53,13 @@ class _SignUpThreeState extends State<SignUpThree> {
     if (image != null) {
       Uint8List? fileBytes = image.files.first.bytes;
       String fileName = image.files.first.name;
-      signUpController
-          .setImageFile(FileModel(filename: fileName, fileBytes: fileBytes!));
+        if (fileBytes != null) {
+        signUpController.setImageFile(FileModel(filename: fileName, fileBytes: fileBytes));
+  }
     }
   }
 
+/*
   Future uploadPdfFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
@@ -68,10 +70,12 @@ class _SignUpThreeState extends State<SignUpThree> {
     if (result != null) {
       Uint8List? fileBytes = result.files.first.bytes;
       String pdfName = result.files.first.name;
-      signUpController
-          .setResumeFile(FileModel(filename: pdfName, fileBytes: fileBytes!));
+        if (fileBytes != null) {
+          signUpController.setResumeFile(FileModel(filename: pdfName, fileBytes: fileBytes));
+  }
     }
   }
+  */
 
   FlowController flowController = Get.put(FlowController());
 
@@ -137,7 +141,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                       keyboardType: TextInputType.number,
                       cursorColor: HexColor("#4f4f4f"),
                       decoration: InputDecoration(
-                        hintText: "2020",
+                        hintText: "2023",
                         fillColor: HexColor("#f0f3f1"),
                         contentPadding:
                             const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -173,7 +177,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                       keyboardType: TextInputType.number,
                       cursorColor: HexColor("#4f4f4f"),
                       decoration: InputDecoration(
-                        hintText: "2020",
+                        hintText: "2023",
                         fillColor: HexColor("#f0f3f1"),
                         contentPadding:
                             const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -246,7 +250,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                /*  Text(
                     "Resume ",
                     style: GoogleFonts.poppins(
                       fontSize: 18,
@@ -295,7 +299,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   }),
                   const SizedBox(
                     height: 5,
-                  ),
+                  ), */
                   MyButton(
                     onPressed: () {
                       signUpController.postSignUpDetails();
