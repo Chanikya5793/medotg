@@ -2,22 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>236710668549-t72vio87cbnu6570ud4s0j0mkt9hk4r5.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.236710668549-t72vio87cbnu6570ud4s0j0mkt9hk4r5</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBcLlYtJ1yx1ALPceUPNuQ4BUnfQgrHU_Y</string>
+	<string>AIzaSyBzi1fxk_4ocfsTl1A5iO7AfNnMyU3qr5g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>236710668549</string>
+	<string>959565015662</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.medotg</string>
 	<key>PROJECT_ID</key>
-	<string>auth-e9db6</string>
+	<string>medotg99</string>
 	<key>STORAGE_BUCKET</key>
-	<string>auth-e9db6.appspot.com</string>
+	<string>medotg99.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:236710668549:ios:0183f57450a3fffdafef6c</string>
+	<string>1:959565015662:ios:3ee9f4b3cccf6c6bb5947f</string>
+	<key>DATABASE_URL</key>
+	<string>https://medotg99-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
