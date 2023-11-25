@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 import 'Screens/login/components/auth_page.dart';
+import 'Screens/login/login.dart';
 import 'firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
               primary: HexColor("#8d8d8d"),
             ),
       ),
-            home: StreamBuilder(
+      home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           } else {
             // Check if user is signed in
             if (snapshot.hasData) {
-              return HomeScreenBody(); // replace with your home screen widget
+              return LoginScreen(); // replace with your home screen widget
             } else {
               return const AuthPage();
             }

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!--
@@ -31,11 +32,24 @@
 
   <title>medotg</title>
   <link rel="manifest" href="manifest.json">
-
+  <!-- This script adds the Firebase configuration -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
   <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDHSLEyVWdHuMxzRuAIkW2H8KxsQvcPfd0",
+      authDomain: "medotg99.firebaseapp.com",
+      databaseURL: "https://medotg99-default-rtdb.firebaseio.com",
+      projectId: "medotg99",
+      storageBucket: "medotg99.appspot.com",
+      messagingSenderId: "959565015662",
+      appId: "1:959565015662:web:db518bd90c4aae18b5947f",
+      measurementId: "G-XRL3LMT31D"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   </script>
+
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
