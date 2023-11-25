@@ -116,7 +116,7 @@ class _SignUpThreeState extends State<SignUpThree> {
               height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 0, 20),
+              padding: const EdgeInsets.fromLTRB(15, 10, 0, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -250,6 +250,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                   const SizedBox(
                     height: 5,
                   ),
+                if (signUpController.userType == "Employee") ...[
                   Text(
                     "Resume ",
                     style: GoogleFonts.poppins(
@@ -297,6 +298,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                       ),
                     );
                   }),
+                ] else ...[],
                   const SizedBox(
                     height: 5,
                   ),

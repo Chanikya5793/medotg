@@ -69,7 +69,7 @@ class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
                       offset: const Offset(0, -253),
                       child: Image.asset(
                         'assets/Images/plants2.png',
-                        scale: 1.5,
+                        scale: 1,
                         width: double.infinity,
                       ),
                     ),

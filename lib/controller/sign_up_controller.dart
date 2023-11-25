@@ -115,7 +115,7 @@ class SignUpController extends GetxController {
     });
 
     uploadResumeFile();
-    await Get.offAll(const HomeScreen());
+    await Get.offAll(() => const HomeScreen());
   }
   Future uploadImageFile() async {
   if (imageFile == null) {
@@ -131,9 +131,13 @@ class SignUpController extends GetxController {
 }
 
   Future<String> uploadResumeFile() async {
-    if (resumeFile == null) {
-      throw Exception('Resume file is null');
+  if (userType == "Employee") {
+    if (resumeFile != null) {
+      await uploadResumeFile();
+    } else {
+      throw('No resume file selected');
     }
+  }
 
     var uploadTask = await FirebaseStorage.instance
         .ref('files/${resumeFile!.filename}')

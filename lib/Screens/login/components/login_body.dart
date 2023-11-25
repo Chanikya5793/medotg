@@ -75,7 +75,16 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.green,
-        body: SingleChildScrollView(
+        body: Stack(
+          children: [
+            // Image asset at the bottom of the stack
+            Image.asset(
+              'assets/Images/plants2.png',
+              scale: 3,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+        SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(0, 400, 0, 0),
           //shrinkWrap: true,
           reverse: true,
@@ -95,7 +104,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+                        padding: const EdgeInsets.fromLTRB(30, 100, 30, 20),
                         child: ListView(
                           //crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -111,7 +120,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                               height: 20,
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 0, 20),
+                              padding: const EdgeInsets.fromLTRB(15, 10, 0, 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -172,7 +181,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                                     buttonText: 'Submit',
                                   ),
                                   const SizedBox(
-                                    height: 12,
+                                    height: 20,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
@@ -238,20 +247,20 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                         ),
                       ),
                     ),
-                    Transform.translate(
+                    /*Transform.translate(
                       offset: const Offset(0, -253),
                       child: Image.asset(
                         'assets/Images/plants2.png',
-                        scale: 1.5,
+                        scale: 3,
                         width: double.infinity,
                       ),
-                    ),
+                    ),*/
                   ],
                 )
               ],
             ),
         ),
-      ),
-    );
+      ]),
+    ));
   }
 }

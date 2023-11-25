@@ -23,7 +23,7 @@ class _SignUpTwoState extends State<SignUpTwo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+        padding: const EdgeInsets.fromLTRB(30, 50, 30, 20),
         child: Column(
           children: [
             Row(
