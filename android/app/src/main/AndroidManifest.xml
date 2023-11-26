@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.medotgg">
-    <application
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="33"/> <application
         android:enableOnBackInvokedCallback="true"
         android:label="medotg"
         android:name="${applicationName}"
