@@ -79,7 +79,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
         });
 
         Get.snackbar('Success', 'Data added successfully');
-        Get.off(const HomeScreenBody());
+        Get.off(() => const HomeScreenBody());
       }
     } catch (e) {
       Get.snackbar('Error', 'There is an error when adding data');
