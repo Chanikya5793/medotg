@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
+import 'package:file_picker/file_picker.dart';
 
 class AddArticlePage extends StatefulWidget {
   const AddArticlePage({super.key});
@@ -40,18 +41,71 @@ class _AddArticlePageState extends State<AddArticlePage> {
       }
     });
   }
+File? _pdfFile;
 
-  Future<String> _uploadImageToFirebase() async {
-    if (_imageFile == null) {
-      throw Exception('No file selected');
+Future<void> _pickPdf() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: ['pdf'],
+  );
+
+  setState(() {
+    if (result != null) {
+      _pdfFile = File(result.files.single.path!);
     }
+  });
+}
+  Future<String?> _uploadImageToFirebase() async {
+  if (_imageFile == null) {
+    bool? confirmed = await Get.defaultDialog<bool>(
+      title: 'No Image selected',
+      middleText: 'Do you want to continue without selecting a Image?',
+      textConfirm: 'Yes',
+      textCancel: 'No',
+      confirmTextColor: Colors.white,
+      onConfirm: () => Get.back(result: true),
+      onCancel: () => Get.back(result: false),
+    );
+
+    if (confirmed == true) {
+      return null;
+    } else {
+      throw Exception('No Image selected');
+    }
+  }
+
 
     final fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final ref = _storage.ref().child('images/$fileName');
     await ref.putFile(_imageFile!);
 
     return await ref.getDownloadURL();
+  }Future<String?> _uploadPdfToFirebase() async {
+  if (_imageFile == null) {
+    bool? confirmed = await Get.defaultDialog<bool>(
+      title: 'No Report selected',
+      middleText: 'Do you want to continue without selecting a Report?',
+      textConfirm: 'Yes',
+      textCancel: 'No',
+      confirmTextColor: Colors.white,
+      onConfirm: () => Get.back(result: true),
+      onCancel: () => Get.back(result: false),
+    );
+
+    if (confirmed == true) {
+      return null;
+    } else {
+      throw Exception('No Report selected');
+    }
   }
+
+
+  final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  final ref = _storage.ref().child('pdfs/$fileName');
+  await ref.putFile(_pdfFile!);
+
+  return await ref.getDownloadURL();
+}
 
   Future<void> _saveData() async {
     try {
@@ -59,13 +113,15 @@ class _AddArticlePageState extends State<AddArticlePage> {
         String title = _title.text;
         String description = _description.text;
 
-        String imageUrl = await _uploadImageToFirebase();
+        String? imageUrl = await _uploadImageToFirebase();
+        String? pdfUrl = await _uploadPdfToFirebase(); // New line
 
         await _articleCollection.add({
           'uid': FirebaseAuth.instance.currentUser!.uid,
           'title': title,
           'description': description,
-          'imageUrl': imageUrl,
+          'imageUrl': imageUrl ?? "",
+          'pdfUrl': pdfUrl ?? "", // New line
           'date': Timestamp.now(),
         });
         final patientRecordsCollection = FirebaseFirestore.instance.collection('patients').doc(_searchQueryController.text).collection('records');
@@ -74,7 +130,8 @@ class _AddArticlePageState extends State<AddArticlePage> {
           'uid': FirebaseAuth.instance.currentUser!.uid,
           'title': title,
           'description': description,
-          'imageUrl': imageUrl,
+          'imageUrl': imageUrl ?? "",
+          'pdfUrl': pdfUrl ?? "", // New line
           'date': Timestamp.now(),
         });
 
@@ -187,6 +244,20 @@ class _AddArticlePageState extends State<AddArticlePage> {
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
+                      onTap: _pickPdf, // This will open the file picker when the button is pressed
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: _pdfFile != null
+                            ? const Icon(Icons.picture_as_pdf, color: Colors.grey)
+                            : const Icon(Icons.add, color: Colors.grey),
+                      ),
+                    ),
+                    GestureDetector(
                       onTap: _pickImage,
                       child: Container(
                         height: 100,
@@ -204,21 +275,16 @@ class _AddArticlePageState extends State<AddArticlePage> {
                       padding: const EdgeInsets.fromLTRB(45, 8, 15, 8),
                       child: ElevatedButton(
                         autofocus: true,
-                        onPressed: () {
-                          _saveData();
-                        },
+                        onPressed: _saveData,
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.green),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                           ),
                         ),
-                        child: const Text('Save',
-                            style: TextStyle(color: Colors.black)),
+                        child: const Text('Save', style: TextStyle(color: Colors.black)),
                       ),
                     ),
                   ],

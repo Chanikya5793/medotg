@@ -154,11 +154,14 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// Add carousel here
-            StreamBuilder<QuerySnapshot>(
+          SizedBox(
+            //height: 200, // Adjust this value as needed
+            child: StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('Collection').snapshots(),
               builder: (context, snapshot) {
@@ -193,6 +196,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                 );
               },
             ),
+            ),
             TextField(
               controller: _searchController,
               onChanged: (value) {
@@ -210,15 +214,15 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Latest Records 🔥',
+              'Latest Records',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
+            
+              StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Collection')
                     .where('title', isGreaterThanOrEqualTo: _searchKeyword)
@@ -235,49 +239,51 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                   // Retrieve article data from snapshot
                   List<DocumentSnapshot> articles = snapshot.data!.docs;
 
-                  return ListView.builder(
-                    itemCount: articles.length,
-                    itemBuilder: (context, index) {
-                      // Retrieve title and imageUrl data from the article
-                      String title = articles[index]['title'];
-                      String imageUrl = articles[index]['imageUrl'];
-                      Timestamp timestamp = articles[index]['date'];
-                      DateTime date = timestamp.toDate();
-                      String formattedDate =
-                          DateFormat('dd MMMM yyyy').format(date);
+                  return SizedBox(
+                    height: 500, // Adjust this value as needed
+                    child: ListView.builder(
+                      itemCount: articles.length,
+                      itemBuilder: (context, index) {
+                        // Retrieve title and imageUrl data from the article
+                        String title = articles[index]['title'];
+                        String imageUrl = articles[index]['imageUrl'];
+                        Timestamp timestamp = articles[index]['date'];
+                        DateTime date = timestamp.toDate();
+                        String formattedDate =
+                            DateFormat('dd MMMM yyyy').format(date);
 
-                      return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailRecordPage(
-                                id: articles[index].id,
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailRecordPage(
+                                  id: articles[index].id,
+                                ),
+                              ),
+                            );
+                          },
+                          leading: Container(
+                            width: 120,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(imageUrl),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          );
-                        },
-                        leading: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: NetworkImage(imageUrl),
-                              fit: BoxFit.cover,
-                            ),
                           ),
-                        ),
-                        title: Text(title),
-                        subtitle: Text(
-                            'Release date: $formattedDate'), // insert the name of the author who made the article
-                      );
-                    },
+                          title: Text(title),
+                          subtitle: Text(
+                              'Release date: $formattedDate'), // insert the name of the author who made the article
+                        );
+                      },
+                    ),
                   );
                 },
               ),
-            ),
-          ],
+        ]),
         ),
       ),
       drawer: Drawer(
