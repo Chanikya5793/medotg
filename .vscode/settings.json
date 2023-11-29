@@ -3,5 +3,21 @@
     "cmake.sourceDirectory": "/Users/chanakya/Downloads/medotg/windows",
     "cSpell.words": [
         "buildscript"
+    ],
+    "cSpell.enableFiletypes": [
+        "apacheconf",
+        "dart",
+        "git-rebase",
+        "github-actions-workflow",
+        "gitignore",
+        "gradle",
+        "gradle-build",
+        "groovy",
+        "http",
+        "ignore",
+        "objective-c",
+        "objective-cpp",
+        "sql",
+        "xml"
     ]
 }

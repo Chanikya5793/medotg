@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medotg/Screens/article/editrecordPage.dart';
+import 'package:medotg/Screens/record/editrecordPage.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 class DetailRecordPage extends StatefulWidget {

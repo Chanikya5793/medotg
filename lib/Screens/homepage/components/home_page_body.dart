@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medotg/Screens/account/accountPage.dart';
-import 'package:medotg/Screens/article/addRecordPage.dart';
-import 'package:medotg/Screens/article/detailRecordPage.dart';
+import 'package:medotg/Screens/record/addRecordPage.dart';
+import 'package:medotg/Screens/record/detailRecordPage.dart';
 import 'package:medotg/Screens/login/login.dart';
 
 class HomeScreenBody extends StatefulWidget {
