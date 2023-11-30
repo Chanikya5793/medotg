@@ -1,15 +1,18 @@
-// ignore_for_file: file_names, use_build_context_synchronously
-
+// ignore_for_file: file_names
+import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path/path.dart'as path;
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 late TextEditingController _recordUrlController;
 
@@ -28,64 +31,129 @@ class EditRecordPageState extends State<EditRecordPage> {
   late TextEditingController _descriptionController;
   late TextEditingController _imageUrlController;
 
-Future<void> _viewImage() async {
-  String imageUrl = _imageUrlController.text;
-  if (imageUrl.isNotEmpty) {
-    await launchUrl(Uri.parse(imageUrl)); // Convert the String to a Uri
-  }
-}
-Future<void> _viewRecord() async {
-  String recordUrl = _recordUrlController.text;
-  if (recordUrl.isNotEmpty) {
-    await launchUrl(Uri.parse(recordUrl)); // Requires the url_launcher package
-  }
-}
-
-Future<void> _deleteImage() async {
-  String imageUrl = _imageUrlController.text;
-  if (imageUrl.isNotEmpty) {
-    Reference storageReference = FirebaseStorage.instance.refFromURL(imageUrl);
-    await storageReference.delete();
-    _imageUrlController.text = '';
-  }
-}
-
-Future<void> _deleteRecord() async {
-  String recordUrl = _recordUrlController.text;
-  if (recordUrl.isNotEmpty) {
-    Reference storageReference = FirebaseStorage.instance.refFromURL(recordUrl);
-    await storageReference.delete();
-    _recordUrlController.text = '';
-  }
-}
-  Future<void> _addImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      File image = File(pickedFile.path);
-      Reference storageReference = FirebaseStorage.instance
-          .ref()
-          .child('images/${path.basename(image.path)}');
-      UploadTask uploadTask = storageReference.putFile(image);
-      await uploadTask.whenComplete(() async {
-        _imageUrlController.text = await storageReference.getDownloadURL();
-      });
+  Future<void> _viewImage() async {
+    String imageUrl = _imageUrlController.text;
+    if (imageUrl.isNotEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Image Preview'),
+          content: InteractiveViewer(
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          )),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      );
     }
   }
-Future<void> _addRecord() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-  if (result != null) {
-    File record = File(result.files.single.path!);
-    Reference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('records/${path.basename(record.path)}');
-    UploadTask uploadTask = storageReference.putFile(record);
-    await uploadTask.whenComplete(() async {
-      _recordUrlController.text = await storageReference.getDownloadURL();
-    });
+  Future<void> _viewRecord() async {
+    String recordUrl = _recordUrlController.text;
+    if (recordUrl.isNotEmpty) {
+      // Store the BuildContext in a local variable before the async operation
+      BuildContext contextBeforeAsync = context;
+
+      // Download the PDF file
+      var response = await http.get(Uri.parse(recordUrl));
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File('${dir.path}/record.pdf');
+      await file.writeAsBytes(response.bodyBytes, flush: true);
+
+      // Display the PDF file
+      // ignore: use_build_context_synchronously
+      _showPdfDialog(contextBeforeAsync, file.path);
+    }
   }
+
+
+  void _showPdfDialog(BuildContext context, String filePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Record Preview'),
+        content: InteractiveViewer(
+          child: PDFView(
+            filePath: filePath,
+            autoSpacing: true,
+            enableSwipe: true,
+            pageSnap: true,
+            swipeHorizontal: true,
+            nightMode: false,
+            onError: (error) {
+              throw(error.toString());
+            },
+            onRender: (pages) {
+              throw('Page count: $pages');
+            },
+            onViewCreated: (PDFViewController pdfViewController) {},
+            onPageChanged: (int? page, int? total) {},
+            onPageError: (page, error) {},
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Future<void> _deleteImage() async {
+    String imageUrl = _imageUrlController.text;
+    if (imageUrl.isNotEmpty) {
+      Reference storageReference = FirebaseStorage.instance.refFromURL(imageUrl);
+      await storageReference.delete();
+      _imageUrlController.text = '';
+    }
+  }
+
+  Future<void> _deleteRecord() async {
+    String recordUrl = _recordUrlController.text;
+    if (recordUrl.isNotEmpty) {
+      Reference storageReference = FirebaseStorage.instance.refFromURL(recordUrl);
+      await storageReference.delete();
+      _recordUrlController.text = '';
+    }
+  }
+    Future<void> _addImage() async {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+      if (pickedFile != null) {
+        File image = File(pickedFile.path);
+        Reference storageReference = FirebaseStorage.instance
+            .ref()
+            .child('images/${path.basename(image.path)}');
+        UploadTask uploadTask = storageReference.putFile(image);
+        await uploadTask.whenComplete(() async {
+          _imageUrlController.text = await storageReference.getDownloadURL();
+        });
+      }
+    }
+  Future<void> _addRecord() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File record = File(result.files.single.path!);
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('records/${path.basename(record.path)}');
+      UploadTask uploadTask = storageReference.putFile(record);
+      await uploadTask.whenComplete(() async {
+        _recordUrlController.text = await storageReference.getDownloadURL();
+      });
+    }
 }
   @override
   void initState() {
@@ -139,12 +207,12 @@ void _uploadData() async {
       'description': description,
       'imageUrl': imageUrl, // This will be an empty string if the image was deleted
       'recordUrl': recordUrl,
+    }).then((_) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreenBody()),
+      );
     });
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreenBody()),
-    );
   }
 }
 
@@ -267,10 +335,11 @@ void _uploadData() async {
                     ),
                   );
                   if (confirm) {
-                    _deleteImage();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Image deleted',style: TextStyle(color: Colors.red),)),
-                    );
+                    _deleteImage().then((_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Image deleted',style: TextStyle(color: Colors.red),)),
+                      );
+                    });
                   }
                 },
                 style: ButtonStyle(
@@ -302,10 +371,11 @@ void _uploadData() async {
                     ),
                   );
                   if (confirm) {
-                    _deleteRecord();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Record deleted',style: TextStyle(color: Colors.red),)),
-                    );
+                    _deleteRecord().then((_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Record deleted',style: TextStyle(color: Colors.red),)),
+                      );
+                    });
                   }
                 },
                 style: ButtonStyle(
