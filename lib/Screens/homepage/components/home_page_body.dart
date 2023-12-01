@@ -162,8 +162,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
           SizedBox(
             //height: 200, // Adjust this value as needed
             child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Collection').snapshots(),
+              stream: FirebaseFirestore.instance.collection('Collection').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const CircularProgressIndicator();
@@ -180,14 +179,22 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           child: Card(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Image.network(doc['imageUrl']),
-                                Text(doc['title']),
-                              ],
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  FadeInImage.assetNetwork(
+                                    placeholder: 'assets/loading.gif', // Replace with your own loading gif
+                                    image: doc['imageUrl'],
+                                    fit: BoxFit.cover,
+                                    imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                      // You can return any widget you want to display when the image fails to load
+                                      return const Text('Error loading image');
+                                    },
+                                  ),
+                                  Text(doc['title']), // This line was outside the Column's children list
+                                ],
+                              ),
                             ),
-                          ),
                           ),
                         );
                       },
@@ -196,7 +203,9 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                 );
               },
             ),
-            ),
+          ),
+
+          // ... other code ...
             TextField(
               controller: _searchController,
               onChanged: (value) {
@@ -272,6 +281,15 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                                 image: NetworkImage(imageUrl),
                                 fit: BoxFit.cover,
                               ),
+                            ),
+                            child: FadeInImage.assetNetwork(
+                              placeholder: 'assets/loading.gif', // Replace with your own loading gif
+                              image: imageUrl,
+                              fit: BoxFit.cover,
+                              imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                // You can return any widget you want to display when the image fails to load
+                                return const Text('Error loading image');
+                              },
                             ),
                           ),
                           title: Text(title),
