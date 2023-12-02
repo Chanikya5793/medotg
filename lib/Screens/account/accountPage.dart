@@ -122,7 +122,7 @@ class AccountPageState extends State<AccountPage> {
             );
           },
         ),
-        title: const Text('Settings'),
+        title: const Text('User Details'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),

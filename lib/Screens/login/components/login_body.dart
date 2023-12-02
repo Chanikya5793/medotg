@@ -80,8 +80,9 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
             // Image asset at the bottom of the stack
             Image.asset(
               'assets/Images/plants2.png',
-              scale: 3,
-              width: double.infinity,
+              scale: 10,
+              width: 500,
+              height: 500,
               fit: BoxFit.cover,
             ),
         SingleChildScrollView(

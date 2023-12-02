@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -18,13 +16,6 @@ class SignUpBodyScreen extends StatefulWidget {
 
 class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
   FlowController flowController = Get.put(FlowController());
-  late int _currentFlow;
-
-  @override
-  void initState() {
-    _currentFlow = FlowController().currentFlow;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +23,24 @@ class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.green,
-        body: ListView(
-          padding: const EdgeInsets.fromLTRB(0, 400, 0, 0),
-          shrinkWrap: true,
-          reverse: true,
+        body: Stack(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+            // Image asset at the bottom of the stack
+            Image.asset(
+              'assets/Images/plants2.png',
+              scale: 10,
+              fit: BoxFit.cover,
+              width: 500,
+              height: 500,
+            ),
+            // Content on top of the image
+            ListView(
+              padding: const EdgeInsets.fromLTRB(0, 400, 0, 0),
+              shrinkWrap: true,
+              reverse: true,
               children: [
-                Stack(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
                       height: 535,
@@ -63,14 +63,6 @@ class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
                             return const SignUpThree();
                           }
                         },
-                      ),
-                    ),
-                    Transform.translate(
-                      offset: const Offset(0, -253),
-                      child: Image.asset(
-                        'assets/Images/plants2.png',
-                        scale: 1,
-                        width: double.infinity,
                       ),
                     ),
                   ],

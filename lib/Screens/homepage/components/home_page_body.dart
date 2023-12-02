@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, use_super_parameters
+// ignore_for_file: prefer_const_constructors, avoid_print, use_super_parameters, use_build_context_synchronously
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,9 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medotg/Screens/account/accountPage.dart';
+import 'package:medotg/Screens/login/login.dart';
 import 'package:medotg/Screens/record/addRecordPage.dart';
 import 'package:medotg/Screens/record/detailRecordPage.dart';
-import 'package:medotg/Screens/login/login.dart';
 
 class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
@@ -183,7 +183,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                               child: Column(
                                 children: [
                                   FadeInImage.assetNetwork(
-                                    placeholder: 'assets/loading.gif', // Replace with your own loading gif
+                                    placeholder: 'assets/Images/loading.gif', // Replace with your own loading gif
                                     image: doc['imageUrl'],
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -283,7 +283,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                               ),
                             ),
                             child: FadeInImage.assetNetwork(
-                              placeholder: 'assets/loading.gif', // Replace with your own loading gif
+                              placeholder: 'assets/Images/loading.gif', // Replace with your own loading gif
                               image: imageUrl,
                               fit: BoxFit.cover,
                               imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -341,17 +341,10 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
               title: const Text('Logout'),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                // Use a Builder to get a new BuildContext
-                Builder(
-                  builder: (newContext) {
-                    Navigator.pushReplacement(
-                      newContext,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
-                    );
-                    return Container(); // Return an empty container
-                  },
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
-              }
+              },
             ),
           ],
         ),
