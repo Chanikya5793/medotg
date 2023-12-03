@@ -1,17 +1,18 @@
 // ignore_for_file: file_names
-import 'package:flutter/material.dart';
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medotg/Screens/homepage/components/home_page_body.dart';
-//import 'package:url_launcher/url_launcher.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-import 'package:path/path.dart'as path;
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
+//import 'package:url_launcher/url_launcher.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:medotg/Screens/homepage/components/home_page_body.dart';
+import 'package:path/path.dart'as path;
 import 'package:path_provider/path_provider.dart';
 
 late TextEditingController _recordUrlController;
@@ -56,13 +57,13 @@ class EditRecordPageState extends State<EditRecordPage> {
   }
 
   Future<void> _viewRecord() async {
-    String recordUrl = _recordUrlController.text;
-    if (recordUrl.isNotEmpty) {
+    String pdfUrl = _recordUrlController.text;
+    if (pdfUrl.isNotEmpty) {
       // Store the BuildContext in a local variable before the async operation
       BuildContext contextBeforeAsync = context;
 
       // Download the PDF file
-      var response = await http.get(Uri.parse(recordUrl));
+      var response = await http.get(Uri.parse(pdfUrl));
       var dir = await getApplicationDocumentsDirectory();
       File file = File('${dir.path}/record.pdf');
       await file.writeAsBytes(response.bodyBytes, flush: true);
@@ -119,9 +120,9 @@ class EditRecordPageState extends State<EditRecordPage> {
   }
 
   Future<void> _deleteRecord() async {
-    String recordUrl = _recordUrlController.text;
-    if (recordUrl.isNotEmpty) {
-      Reference storageReference = FirebaseStorage.instance.refFromURL(recordUrl);
+    String pdfUrl = _recordUrlController.text;
+    if (pdfUrl.isNotEmpty) {
+      Reference storageReference = FirebaseStorage.instance.refFromURL(pdfUrl);
       await storageReference.delete();
       _recordUrlController.text = '';
     }
@@ -188,7 +189,7 @@ class EditRecordPageState extends State<EditRecordPage> {
         _titleController.text = data['title'];
         _descriptionController.text = data['description'];
         _imageUrlController.text = data['imageUrl'];
-        _recordUrlController.text = data['recordUrl'];
+        _recordUrlController.text = data['pdfUrl'];
       });
     }
   }
@@ -197,7 +198,7 @@ void _uploadData() async {
   String title = _titleController.text;
   String description = _descriptionController.text;
   String imageUrl = _imageUrlController.text;
-  String recordUrl = _recordUrlController.text;
+  String pdfUrl = _recordUrlController.text;
   if (title.isNotEmpty && description.isNotEmpty) {
     await FirebaseFirestore.instance
         .collection('Collection')
@@ -206,7 +207,7 @@ void _uploadData() async {
       'title': title,
       'description': description,
       'imageUrl': imageUrl, // This will be an empty string if the image was deleted
-      'recordUrl': recordUrl,
+      'pdfUrl': pdfUrl,
     }).then((_) {
       Navigator.pushReplacement(
         context,
