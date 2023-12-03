@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_const_constructors, duplicate_import, unused_import
 import 'dart:async'; // Add this line
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,12 +10,6 @@ import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 import 'package:medotg/Screens/homepage/home_page.dart';
 import 'Screens/login/components/auth_page.dart';
 import 'Screens/login/login.dart';
-import 'firebase_options.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-
-
-
 import 'firebase_options.dart';
 
 void main() {
