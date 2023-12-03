@@ -79,7 +79,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
           children: [
             // Image asset at the bottom of the stack
             Image.asset(
-              'assets/Images/plants2.png',
+              'assets/Images/plants.png',
               scale: 10,
               width: 500,
               height: 500,
@@ -251,7 +251,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
                     /*Transform.translate(
                       offset: const Offset(0, -253),
                       child: Image.asset(
-                        'assets/Images/plants2.png',
+                        'assets/Images/plants.png',
                         scale: 3,
                         width: double.infinity,
                       ),

@@ -99767,7 +99767,7 @@ return A.t($async$zq,r)},
 a3U(a){var s=this.c
 s.toString
 A.Ao(new A.aBo(a),s,t.z)},
-G(a){var s=this,r=null,q="#8d8d8d",p=A.aQR("assets/Images/plants2.png",B.ci,500,10,500),o=A.be("#ffffff"),n=t.p
+G(a){var s=this,r=null,q="#8d8d8d",p=A.aQR("assets/Images/plants.png",B.ci,500,10,500),o=A.be("#ffffff"),n=t.p
 return A.je(!0,A.tK(r,B.dw,A.hd(B.bc,A.a([p,A.y2(A.e0(A.a([A.hd(B.bc,A.a([A.cF(r,new A.bp(B.H2,A.Re(A.a([A.b2("Log In",r,r,r,A.cs().$3$color$fontSize$fontWeight(new A.b4(A.be("#4f4f4f")>>>0),40,B.aX),r,r),B.ll,new A.bp(B.o_,A.e0(A.a([A.b2("Email",r,r,r,A.cs().$2$color$fontSize(new A.b4(A.be(q)>>>0),18),r,r),B.dR,new A.Ef(s.d,"enter your email",!1,B.Iz,r),new A.bp(B.o2,A.b2(s.f,r,r,r,A.cs().$2$color$fontSize(B.cY,12),r,r),r),B.dR,A.b2("Password",r,r,r,A.cs().$2$color$fontSize(new A.b4(A.be(q)>>>0),18),r,r),B.dR,new A.Ef(s.e,"**************",!0,B.IA,r),B.ll,new A.t2(s.ga42(),"Submit",r),B.ll,new A.bp(B.o1,A.fS(A.b2("Forgot Password",r,r,r,A.cs().$2$color$fontSize(new A.b4(A.be(q)>>>0),18),r,r),new A.aBm(s,a),r),r),new A.bp(B.GS,A.iD(A.a([A.b2("Don't have an account yet?",r,r,r,A.cs().$2$color$fontSize(new A.b4(A.be(q)>>>0),15),r,r),A.fS(A.b2("Sign Up",r,r,r,A.cs().$2$color$fontSize(new A.b4(A.be("#44564a")>>>0),15),r,r),new A.aBn(a),r)],n),B.a3,B.N,B.T),r)],n),B.bC,B.N,B.T),r)],n),r,r,!1,!1),r),B.m,r,r,new A.cK(new A.b4(o>>>0),r,r,B.mt,r,r,B.al),r,535,r,r,r,r,r,1/0)],n),B.u,B.bz,r)],n),B.a3,B.N,B.T),B.nY,!0)],n),B.u,B.bz,r),r,!1),!0,B.S,!0,!0)}}
 A.aBp.prototype={
 $1(a){return B.cS},
@@ -100767,7 +100767,7 @@ $S:33}
 A.Gx.prototype={
 a4(){return new A.a2v(A.rC($.bI(),A.aeH(),!1,t.zv),B.i)}}
 A.a2v.prototype={
-G(a){var s=null,r=A.aQR("assets/Images/plants2.png",B.ci,500,10,500),q=A.be("#ffffff"),p=t.p
+G(a){var s=null,r=A.aQR("assets/Images/plants.png",B.ci,500,10,500),q=A.be("#ffffff"),p=t.p
 return A.je(!0,A.tK(s,B.dw,A.hd(B.bc,A.a([r,A.Re(A.a([A.e0(A.a([A.cF(s,A.afZ(new A.aEi(this),s,s,s,t.zv),B.m,s,s,new A.cK(new A.b4(q>>>0),s,s,B.mt,s,s,B.al),s,535,s,s,s,s,s,1/0)],p),B.a3,B.hz,B.T)],p),B.nY,s,!0,!0)],p),B.u,B.bz,s),s,!1),!0,B.S,!0,!0)}}
 A.aEi.prototype={
 $1(a){var s=this.a.d.ax

@@ -27,7 +27,7 @@ class _SignUpBodyScreenState extends State<SignUpBodyScreen> {
           children: [
             // Image asset at the bottom of the stack
             Image.asset(
-              'assets/Images/plants2.png',
+              'assets/Images/plants.png',
               scale: 10,
               fit: BoxFit.cover,
               width: 500,
