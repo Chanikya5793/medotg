@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           } else {
             // Check if user is signed in
             if (snapshot.hasData) {
-              return HomeScreen(); // replace with your home screen widget
+              return HomeScreenBody(); // replace with your home screen widget
             } else {
               return const AuthPage();
             }
