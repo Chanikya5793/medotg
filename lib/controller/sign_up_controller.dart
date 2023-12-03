@@ -115,7 +115,7 @@ class SignUpController extends GetxController {
     });
 
     uploadResumeFile();
-    await Get.offAll(() => const HomeScreen());
+    await Get.offAll(() => const HomeScreenBody());
   }
   Future uploadImageFile() async {
   if (imageFile == null) {

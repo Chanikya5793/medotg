@@ -33,7 +33,7 @@ class _LoginBodyScreenState extends State<LoginBodyScreen> {
       // Navigate to home screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreenBody()), // replace HomeScreen() with your home screen widget
+        MaterialPageRoute(builder: (context) => const HomeScreenBody()), // replace HomeScreenBody() with your home screen widget
       );
     } on FirebaseAuthException catch (e) {
       showErrorMessage(e.code);

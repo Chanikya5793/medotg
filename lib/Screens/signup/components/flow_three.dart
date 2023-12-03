@@ -226,7 +226,7 @@ class _SignUpThreeState extends State<SignUpThree> {
                       )),
                     ),
                     onPressed: () async {
-                      uploadImageFile();
+                      await uploadImageFile();
                       setState(() {
                         int i = 1 + 1;
                       });
