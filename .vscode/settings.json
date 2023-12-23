@@ -19,5 +19,6 @@
         "objective-cpp",
         "sql",
         "xml"
-    ]
+    ],
+    "fluttergpt.apiKey": "AIzaSyAgOQ1m1MOX4eEC_qs06xkX3XdobMEbORM"
 }
