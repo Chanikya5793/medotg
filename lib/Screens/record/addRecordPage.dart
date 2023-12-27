@@ -29,7 +29,7 @@ class _AddArticlePageState extends State<AddArticlePage> {
 
   File? _imageFile;
   final _storage = FirebaseStorage.instance;
-  final _articleCollection = FirebaseFirestore.instance.collection('Collection');
+  //final _articleCollection = FirebaseFirestore.instance.collection('Collection');
 
   Future<void> _pickImage() async {
     final pickedFile =
@@ -116,14 +116,14 @@ Future<void> _pickPdf() async {
         String? imageUrl = await _uploadImageToFirebase();
         String? pdfUrl = await _uploadPdfToFirebase(); // New line
 
-        await _articleCollection.add({
+        /*await _articleCollection.add({
           'uid': FirebaseAuth.instance.currentUser!.uid,
           'title': title,
           'description': description,
           'imageUrl': imageUrl ?? "",
           'pdfUrl': pdfUrl ?? "", // New line
           'date': Timestamp.now(),
-        });
+        });*/
         final patientRecordsCollection = FirebaseFirestore.instance.collection('patients').doc(_searchQueryController.text).collection('records');
 
         await patientRecordsCollection.add({

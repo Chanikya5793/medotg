@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 import 'package:path/path.dart'as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 late TextEditingController _recordUrlController;
 
@@ -25,9 +26,21 @@ class EditRecordPage extends StatefulWidget {
 
   @override
   EditRecordPageState createState() => EditRecordPageState();
+
+    Future<String> getPatientName() async {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    final String currentUserId = currentUser != null ? currentUser.uid : '';
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final DocumentReference userDoc = firestore.collection('users').doc(currentUserId);
+
+    final DocumentSnapshot userSnapshot = await userDoc.get();
+    return userSnapshot.get('name') ?? '';
+  }
 }
 
 class EditRecordPageState extends State<EditRecordPage> {
+  String patientName = '';
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _imageUrlController;
@@ -164,6 +177,12 @@ class EditRecordPageState extends State<EditRecordPage> {
     _imageUrlController = TextEditingController();
     _recordUrlController = TextEditingController();
     _fetchData();
+
+        widget.getPatientName().then((name) {
+      setState(() {
+        patientName = name;
+      });
+    });
     
   }
 
@@ -179,7 +198,7 @@ class EditRecordPageState extends State<EditRecordPage> {
 
   void _fetchData() async {
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('Collection')
+        .collection('patients').doc(patientName).collection('records')
         .doc(widget.documentId)
         .get();
 
@@ -201,7 +220,7 @@ void _uploadData() async {
   String pdfUrl = _recordUrlController.text;
   if (title.isNotEmpty && description.isNotEmpty) {
     await FirebaseFirestore.instance
-        .collection('Collection')
+        .collection('patients').doc(patientName).collection('records')
         .doc(widget.documentId)
         .update({
       'title': title,

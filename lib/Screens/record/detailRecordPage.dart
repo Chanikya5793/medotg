@@ -9,11 +9,14 @@ import 'package:medotg/Screens/homepage/components/home_page_body.dart';
 
 class DetailRecordPage extends StatefulWidget {
   final String id;
+  final String patientName;
 
-  const DetailRecordPage({super.key, required this.id});
+  const DetailRecordPage({super.key, required this.id, required this.patientName});
+
   @override
   State<DetailRecordPage> createState() => _DetailRecordPageState();
 }
+
 
 class _DetailRecordPageState extends State<DetailRecordPage> {
   DocumentSnapshot? _articleSnapshot;
@@ -38,7 +41,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
   Future<void> _fetchArticle() async {
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('Collection')
+          .collection('patients').doc(widget.patientName).collection('records')
           .doc(widget.id)
           .get();
 
@@ -71,7 +74,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
 
   Future<void> _delete() async {
     await FirebaseFirestore.instance
-        .collection('Collection')
+        .collection('patients').doc(widget.patientName).collection('records')
         .doc(widget.id)
         .delete();
   }
@@ -100,7 +103,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
 
       if (username.isNotEmpty) {
         FirebaseFirestore.instance
-            .collection('Collection')
+            .collection('patients').doc(widget.patientName).collection('records')
             .doc(widget.id)
             .collection('comment')
             .add({
@@ -234,7 +237,7 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
               ),
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('Collection')
+                    .collection('patients').doc(widget.patientName).collection('records')
                     .doc(widget.id)
                     .collection('comment')
                     .orderBy('timestamp', descending: true)

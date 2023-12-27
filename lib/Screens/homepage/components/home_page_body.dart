@@ -83,6 +83,8 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  String patientName = ''; // Store the patient name
+
   final TextEditingController _searchController = TextEditingController();
   String _searchKeyword = '';
   String userType = '';
@@ -92,18 +94,21 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
       fetchUserType();
     }
 
-    Future<void> fetchUserType() async {
+  Future<void> fetchUserType() async {
+    if (auth.currentUser != null) {
       var doc = await firestore.collection('user').doc(auth.currentUser!.uid).get();
       if (doc.exists && doc.data()?.containsKey('userType') == true) {
         if (mounted) {
           setState(() {
             userType = doc.data()?['userType'] ?? '';
+            patientName = doc.data()?['name'] ?? ''; // Fetch patient name
           });
         }
       } else {
         print('Document does not exist or does not contain userType field');
       }
     }
+  }
 
 
   @override
@@ -161,8 +166,20 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             /// Add carousel here
           SizedBox(
             //height: 200, // Adjust this value as needed
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('Collection').snapshots(),
+            /*child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('patients')  // Access the "patients" collection
+              .doc(patientName)  // Access the subcollection with the patient's name
+              .collection('records')  // Access the records collection within the subcollection
+              .where('title', isGreaterThanOrEqualTo: _searchKeyword)
+              .where('patientName', isEqualTo: patientName)
+              .snapshots(),*/
+              child: StreamBuilder<QuerySnapshot>(
+                stream: patientName.isNotEmpty
+                  ? FirebaseFirestore.instance.collection('patients')
+                      .doc(patientName)
+                      .collection('records')
+                      .snapshots()
+                  : Stream.empty(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const CircularProgressIndicator();
@@ -173,6 +190,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                     autoPlay: true,
                   ),
                   items: snapshot.data!.docs.map((doc) {
+                      String imageUrl = doc['imageUrl']; // Get the image URL from the document
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
@@ -184,7 +202,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                                 children: [
                                   FadeInImage.assetNetwork(
                                     placeholder: 'assets/Images/loading.gif', // Replace with your own loading gif
-                                    image: doc['imageUrl'],
+                                    image: imageUrl,
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                                       // You can return any widget you want to display when the image fails to load
@@ -231,11 +249,15 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
             ),
             const SizedBox(height: 16),
             
+              // For the ListView.builder
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('Collection')
-                    .where('title', isGreaterThanOrEqualTo: _searchKeyword)
-                    .snapshots(),
+                stream: patientName.isNotEmpty
+                  ? FirebaseFirestore.instance.collection('patients')
+                      .doc(patientName)
+                      .collection('records')
+                      .where('title', isGreaterThanOrEqualTo: _searchKeyword)
+                      .snapshots()
+                  : Stream.empty(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text('There is an error');
@@ -243,6 +265,9 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
+                  }
+                  if (snapshot.data == null) {
+                    return const Text('No data available');
                   }
 
                   // Retrieve article data from snapshot
@@ -267,7 +292,7 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailRecordPage(
-                                  id: articles[index].id,
+                                  id: articles[index].id,patientName: patientName
                                 ),
                               ),
                             );
@@ -289,6 +314,8 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
                               imageErrorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                                 // You can return any widget you want to display when the image fails to load
                                 return const Text('Error loading image');
+                                // ignore: dead_code
+                                print('Image URL: $imageUrl');
                               },
                             ),
                           ),

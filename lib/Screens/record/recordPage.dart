@@ -128,7 +128,7 @@ class _RecordPageState extends State<RecordPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => DetailRecordPage(
-                                      id: articles[index].id,
+                                      id: articles[index].id, patientName: '',
                                     ),
                                   ),
                                 );

@@ -2,7 +2,8 @@
     "liveServer.settings.port": 5501,
     "cmake.sourceDirectory": "/Users/chanakya/Downloads/medotg/windows",
     "cSpell.words": [
-        "buildscript"
+        "buildscript",
+        "subcollection"
     ],
     "cSpell.enableFiletypes": [
         "apacheconf",
