@@ -41,6 +41,13 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
     _fetchUserType();
   }
 
+  @override
+  void dispose() {
+    // Dispose of resources here
+    // For example, if you have any controllers or other resources to dispose of, do it here.
+    super.dispose();
+  }
+
   Future<void> _fetchArticle() async {
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
