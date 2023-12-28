@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medotg/Screens/record/editrecordPage.dart';
 import 'package:medotg/Screens/homepage/components/home_page_body.dart';
-
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'pdf_screen.dart';
 class DetailRecordPage extends StatefulWidget {
   final String id;
   final String patientName;
@@ -187,6 +190,31 @@ class _DetailRecordPageState extends State<DetailRecordPage> {
                 ),
               ),
               const SizedBox(height: 16),
+              ElevatedButton(
+                child: const Text('View PDF'),
+                onPressed: () async {
+                  // Store the context in a local variable before the async operation
+                  BuildContext currentContext = context;
+
+                  // Fetch the PDF URL from Firestore
+                  String pdfUrl = _articleSnapshot?['pdfUrl'];
+
+                  // Download the PDF file and get the local path
+                  var dio = Dio();
+                  var dir = await getApplicationDocumentsDirectory();
+                  var pdfPath = '${dir.path}/file.pdf';
+                  await dio.download(pdfUrl, pdfPath);
+
+                  // Use the stored context here
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(
+                    currentContext,
+                    MaterialPageRoute(
+                      builder: (context) => PDFScreen(pdfPath),
+                    ),
+                  );
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
