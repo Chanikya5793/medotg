@@ -157,7 +157,38 @@ class HomeScreenBodyState extends State<HomeScreenBody> {
           ],
         ),
       ),
-      body: Padding(
+
+          body: userType == 'Employee'
+        ? StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('patients').snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong');
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text("Loading");
+              }
+
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(data['name']),
+                    onTap: () {
+                      setState(() {
+                        patientName = data['name'];
+                        //patientId = document.id;
+                      });
+                    },
+                  );
+                }).toList(),
+              );
+            },
+          )
+       // : Container(), // Render nothing for non-employee users
+
+      : Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
         child: Column(
