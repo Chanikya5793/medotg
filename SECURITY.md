@@ -2,25 +2,15 @@
 
 ## Supported Versions
 
-Security updates are provided for the latest version on the default branch.
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Please **do not** open a public issue for security vulnerabilities.
+If you discover a security vulnerability, please email **security@chanakyachowdary.in**.
 
-Instead, report vulnerabilities privately:
+For general inquiries or non-security issues, please contact **contact@chanakyachowdary.in**.
 
-- Email: **SECURITY_EMAIL**
-
-If you do not have an email to use, you may open a GitHub issue and clearly mark it as a security concern; maintainers may ask you to move the discussion to a private channel.
-
-## What to include
-
-- A description of the vulnerability and potential impact
-- Steps to reproduce / proof of concept
-- Affected versions/commits
-- Any suggested remediation
-
-## Response timeline
-
-We aim to acknowledge reports within **72 hours** and provide a remediation plan as soon as practical.
+We will respond as quickly as possible and work with you to address the issue.
